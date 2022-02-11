@@ -35,20 +35,8 @@
 </script>
 
 <div class="container">
-	<p class="top-text initanim initanim-s-600 initanim-d-200">
-		Language support for
-		{#each technologies as tech, i}
-			<span>
-				{tech.title}{i < technologies.length - 1 ? ',' : '.'}
-				{i === technologies.length - 2 ? 'and' : ''}
-			</span>
-		{/each}
-	</p>
-	<h1 class="initanim initanim-s-600 initanim-d-300">Beautiful web components to <span>catalize</span> your JavaScript projects.</h1>
-	<p class="description initanim initanim-s-600 initanim-d-400">
-		CSSLab is a user-generated platform and takes a developer-first approach. Slot beautifully customizble web components directly into your
-		applications. Have a glance at all of our custom components, and copy them directly into your projects for FREE.
-	</p>
+	<h1 class="initanim initanim-s-600 initanim-d-300">Coming Soon</h1>
+	<p class="description initanim initanim-s-600 initanim-d-400">Q3, 2022</p>
 </div>
 
 <style lang="scss">
@@ -56,10 +44,13 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		width: 110rem;
 		margin: 5rem auto;
 		gap: $gutter;
 		max-width: calc(100% - #{$gutter * 2});
+
+		flex: 1;
 
 		.top-text {
 			color: $col-light-4;
@@ -70,7 +61,7 @@
 		h1 {
 			color: #fff;
 			text-align: center;
-			font-size: 5.5rem;
+			font-size: 8rem;
 
 			@include respond(992) {
 				font-size: 4rem;
@@ -95,7 +86,7 @@
 		}
 
 		.description {
-			font-size: 1.8rem;
+			font-size: 3.6rem;
 			text-align: center;
 			margin: 0;
 			color: $col-light-3;

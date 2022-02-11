@@ -24,7 +24,7 @@
 
 <svelte:window on:mousemove={handleMouseMove} />
 <div class="root" class:dark>
-	<Nav dark={!dark} />
+	<!-- <Nav dark={!dark} /> -->
 	<div class="content">
 		<slot />
 	</div>
@@ -37,6 +37,8 @@
 
 <style lang="scss">
 	.root {
+		display: flex;
+		flex-direction: column;
 		&.dark {
 			background-color: $col-dark-1;
 		}
@@ -82,5 +84,8 @@
 	.content {
 		position: relative;
 		z-index: 2;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
 	}
 </style>
