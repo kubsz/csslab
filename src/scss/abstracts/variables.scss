@@ -1,0 +1,32 @@
+$col-background: #e7e7f1;
+$col-primary: #ffd166;
+$col-secondary: #d66853;
+$col-tertiary: #7d4e57;
+
+$col-dark-1: #11151c;
+$col-dark-2: #212d40; // in between 1/2
+$col-dark-3: #364156;
+$col-dark-4: #1b2344;
+$col-dark-5: rgba(#010825, 0.7);
+
+$col-light-1: #fff;
+$col-light-2: #e1e1e2;
+$col-light-3: #94a1b2;
+// $col-light-4: #94a1b2;
+$col-light-4: #798492;
+$col-light-5: rgba(#fff, 0.7);
+
+$col-dark-gradient: linear-gradient(to bottom right, $col-dark-1, $col-dark-2);
+
+$gutter: 1.5rem;
+
+$nav-height: 8rem;
+
+$container-shadow-large: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.1);
+$container-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.05);
+
+$transition-medium: 0.3s;
+$transition-fast: 0.15s;
+
+$radius: 0.5rem;
+$shadow: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.2);

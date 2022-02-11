@@ -1,0 +1,13 @@
+@import './abstracts/variables';
+@import './abstracts/normalize';
+@import './abstracts/mixins';
+
+@import './components/initanim';
+.root {
+	flex: 1;
+}
+
+// $col-dark-1: #010825;
+// $col-dark-2: #0c1746;
+
+// $col-primary: red;
