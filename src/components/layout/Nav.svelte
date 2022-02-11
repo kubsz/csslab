@@ -181,7 +181,7 @@
 
 		background-color: $col-dark-1;
 
-		transition: 0.2s ease;
+		// transition: 0.2s ease;
 
 		&.shadow {
 			padding: $gutter;
