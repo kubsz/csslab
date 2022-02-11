@@ -2,6 +2,8 @@
 @import './abstracts/normalize';
 @import './abstracts/mixins';
 
+@import './base/utilities';
+
 @import './components/initanim';
 .root {
 	flex: 1;

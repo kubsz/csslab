@@ -1,6 +1,12 @@
 <script>
-	import Logo from '../../assets/logo-light.svg';
+	import { onMount } from 'svelte';
+
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	import NavItem from './NavItem.svelte';
+
+	import Logo from '../../assets/logo-light.svg';
 
 	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
 	import hamburgerIcon from '@iconify/icons-mdi/hamburger.js';
@@ -14,8 +20,12 @@
 	import svelteIcon from '@iconify/icons-cib/svelte.js';
 	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
 
+	let navRef;
+
 	export let colors = null;
 	export let dark;
+
+	let scrollY = 0;
 
 	const options = [
 		{
@@ -136,12 +146,17 @@
 			fill: true
 		}
 	];
+
+	const getNavHeight = () => dispatch('getNavHeight', { value: Math.ceil(navRef.getBoundingClientRect().height) });
+
+	onMount(getNavHeight);
 </script>
 
-<nav class:dark>
-	<div class="logo">
+<svelte:window on:resize={getNavHeight} bind:scrollY on:scroll={getNavHeight} />
+<nav bind:this={navRef} class:shadow={scrollY > 0}>
+	<a href="/" class="logo">
 		<Logo />
-	</div>
+	</a>
 	<ul>
 		{#each options.filter((opt) => !opt.right) as option}
 			<NavItem {...option} />
@@ -156,15 +171,22 @@
 
 <style lang="scss">
 	nav {
-		position: relative;
+		position: fixed;
+		width: 100%;
 		z-index: 3;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: $gutter * 1.5 $gutter * 2;
 
-		&.dark {
-			background-color: $col-dark-1;
+		background-color: $col-dark-1;
+
+		transition: 0.2s ease;
+
+		&.shadow {
+			padding: $gutter;
+			box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+			// background-color: $col-dark-3;
 		}
 
 		.logo {

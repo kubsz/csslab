@@ -10,16 +10,21 @@
 	let dropdownActive = false;
 </script>
 
-<li on:mouseenter={!dropdown || (() => (dropdownActive = true))()} on:mouseleave={!dropdown || (() => (dropdownActive = false))()}>
+<li
+	on:mouseenter|self={!dropdown || (() => (dropdownActive = true))()}
+	on:mouseleave|self={!dropdown || (() => (dropdownActive = false))()}
+>
 	<a class:fill href={link}>
 		<span>{label}</span>
 		{#if dropdown}
 			<Icon class="arrow" icon={chevronDown} />
 		{/if}
 	</a>
-	{#if dropdownActive}
-		<NavDropdown heading={label} {dropdown} />
-	{/if}
+	<div class="dropdown-container" class:u-pointer-events-none={!dropdownActive}>
+		{#if dropdownActive}
+			<NavDropdown heading={label} {dropdown} />
+		{/if}
+	</div>
 </li>
 
 <style lang="scss">

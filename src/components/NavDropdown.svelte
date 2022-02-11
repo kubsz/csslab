@@ -8,7 +8,7 @@
 	export let heading;
 </script>
 
-<div class="dropdown" transition:fly={{ y: 10, duration: 400, easing: backOut }}>
+<div class="dropdown" transition:fly|local={{ y: 10, duration: 400, easing: backOut }}>
 	<h3 in:scale={{ delay: 100, y: 20 }}>{heading}</h3>
 	<ul>
 		{#each dropdown.sections as section, i (section.title)}
@@ -37,7 +37,7 @@
 				<p>{dropdown.footer.description}</p>
 			</div>
 			<div class="button-container" in:scale={{ delay: 700 }}>
-				<Button>{dropdown.footer.button.text}</Button>
+				<Button modifiers={['secondary']}>{dropdown.footer.button.text}</Button>
 			</div>
 		</div>
 	{/if}
@@ -126,7 +126,8 @@
 
 						h4 {
 							font-size: 1.4rem;
-							font-weight: 500;
+							font-weight: 600;
+							color: $col-dark-3;
 
 							.new-badge {
 								display: inline-block;
@@ -145,7 +146,7 @@
 						}
 						p {
 							font-size: 1.2rem;
-							color: $col-dark-5;
+							color: $col-dark-6;
 						}
 					}
 				}
@@ -155,7 +156,7 @@
 		.footer {
 			align-self: stretch;
 			background-color: rgba($col-dark-1, 0.05);
-			padding: $gutter;
+			padding: $gutter 2rem;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
