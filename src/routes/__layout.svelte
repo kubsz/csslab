@@ -14,7 +14,6 @@
 
 	export let dark = false;
 	let navHeight = 94;
-	$: console.log(navHeight);
 </script>
 
 <div class="root" style="--nav-height: {navHeight}px">

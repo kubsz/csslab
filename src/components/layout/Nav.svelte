@@ -153,7 +153,7 @@
 </script>
 
 <svelte:window on:resize={getNavHeight} bind:scrollY on:scroll={getNavHeight} />
-<nav bind:this={navRef} class:shadow={scrollY > 0}>
+<nav bind:this={navRef} class:shadow={false}>
 	<a href="/" class="logo">
 		<Logo />
 	</a>
