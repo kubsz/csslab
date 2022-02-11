@@ -1,10 +1,10 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import Icon from '@iconify/svelte';
-	import { javascriptFill } from '@iconify/icons-akar-icons/javascript-fill';
-	import { svelteIcon } from '@iconify/icons-cib/svelte';
-	import { vueFill } from '@iconify/icons-akar-icons/vue-fill';
-	import { reactFill } from '@iconify/icons-akar-icons/react-fill';
+	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
+	import svelteIcon from '@iconify/icons-cib/svelte.js';
+	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
+	import reactFill from '@iconify/icons-akar-icons/react-fill.js';
 	const technologies = [
 		{
 			title: 'React',

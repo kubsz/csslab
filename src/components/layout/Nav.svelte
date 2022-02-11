@@ -2,17 +2,17 @@
 	import Logo from '../../assets/logo-light.svg';
 	import NavItem from './NavItem.svelte';
 
-	import formDropdown from '@iconify/icons-mdi/form-dropdown';
-	import hamburgerIcon from '@iconify/icons-mdi/hamburger';
-	import searchIcon from '@iconify/icons-charm/search';
-	import baselineMiscellaneousServices from '@iconify/icons-ic/baseline-miscellaneous-services';
-	import cursorClick from '@iconify/icons-heroicons-solid/cursor-click';
-	import popupIcon from '@iconify/icons-entypo/popup';
+	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
+	import hamburgerIcon from '@iconify/icons-mdi/hamburger.js';
+	import searchIcon from '@iconify/icons-charm/search.js';
+	import baselineMiscellaneousServices from '@iconify/icons-ic/baseline-miscellaneous-services.js';
+	import cursorClick from '@iconify/icons-heroicons-solid/cursor-click.js';
+	import popupIcon from '@iconify/icons-entypo/popup.js';
 
-	import reactFill from '@iconify/icons-akar-icons/react-fill';
-	import vueFill from '@iconify/icons-akar-icons/vue-fill';
-	import svelteIcon from '@iconify/icons-cib/svelte';
-	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill';
+	import reactFill from '@iconify/icons-akar-icons/react-fill.js';
+	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
+	import svelteIcon from '@iconify/icons-cib/svelte.js';
+	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
 
 	export let colors = null;
 	export let dark;

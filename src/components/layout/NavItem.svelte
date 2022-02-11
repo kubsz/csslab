@@ -1,6 +1,6 @@
 <script>
 	import Icon from '@iconify/svelte';
-	import chevronDown from '@iconify/icons-charm/chevron-down';
+	import chevronDown from '@iconify/icons-charm/chevron-down.js';
 	import NavDropdown from '../NavDropdown.svelte';
 
 	export let label, link;
