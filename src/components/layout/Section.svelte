@@ -12,7 +12,7 @@
 
 <svelte:window on:mousemove={handleMouseMove} />
 <div class="section" class:dark>
-	<div class="section-content">
+	<div class="section-content margin">
 		<slot />
 	</div>
 	{#if texture}
@@ -59,10 +59,10 @@
 		&::before {
 			background-image: url('/textures/crisscross.png');
 			background-size: 150px;
-			opacity: 0.7;
+			opacity: 1;
 		}
 		.texture-opening {
-			background-image: radial-gradient(transparent, $col-dark-1 600px);
+			background-image: radial-gradient(rgba($col-dark-1, .5), $col-dark-1 20vw);
 			background-position: center;
 			width: 200vw;
 			height: 200vw;

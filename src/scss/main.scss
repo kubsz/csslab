@@ -2,9 +2,12 @@
 @import './abstracts/normalize';
 @import './abstracts/mixins';
 
+@import './base/base';
 @import './base/utilities';
+@import './base/typography';
 
 @import './components/initanim';
+@import './components/stack';
 .root {
 	flex: 1;
 }

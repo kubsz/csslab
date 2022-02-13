@@ -1,0 +1,10 @@
+.stack {
+	display: flex;
+	flex-direction: column;
+	&-5 {
+		gap: 5px;
+	}
+	&-10 {
+		gap: 10px;
+	}
+}

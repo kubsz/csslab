@@ -2,3 +2,15 @@
 .u-pointer-events-none * {
 	pointer-events: none !important;
 }
+
+.u-color-primary-dark {
+	color: darken($col-primary, 20%);
+}
+
+.u-text-shadow {
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+}
+
+.u-uppercase {
+	text-transform: uppercase;
+}
