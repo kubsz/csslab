@@ -10,6 +10,7 @@
 </script>
 
 <script>
+	import Footer from '../components/layout/Footer.svelte';
 	import Nav from '../components/layout/Nav.svelte';
 
 	export let dark = false;
@@ -21,6 +22,7 @@
 	<div class="content">
 		<slot />
 	</div>
+	<Footer />
 </div>
 
 <style lang="scss">

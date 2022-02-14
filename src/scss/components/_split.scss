@@ -1,0 +1,22 @@
+.split {
+	display: flex;
+	gap: $gutter;
+
+	// temp
+	min-height: calc(100vh - var(--nav-height));
+	padding: 5rem 0;
+
+	&.align-center {
+		align-items: center;
+	}
+
+	&.double-gutter {
+		gap: $gutter * 2;
+	}
+
+	&-section {
+		flex-basis: 50%;
+		flex-shrink: 0;
+		flex-grow: 0;
+	}
+}

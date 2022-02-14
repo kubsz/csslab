@@ -6,6 +6,7 @@
 
 	import Section from './../components/layout/Section.svelte';
 	import Button from '../components/general/Button.svelte';
+	import SupportedTechnologyShowcase from '../components/misc/SupportedTechnologyShowcase.svelte';
 
 	const technologies = [
 		{
@@ -30,7 +31,7 @@
 			title: 'JavaScript',
 			link: '/technologies/javascript',
 			icon: javascriptFill,
-			color: [240, 220, 27],
+			color: [218, 185, 45],
 			recentlyAdded: true
 		}
 	];
@@ -59,35 +60,10 @@
 	</div>
 </Section>
 <Section margin>
-	<div class="split break-m">
-		<div class="split-section">
-			<div class="stack stack-10">
-				<span class="typ-heading-tertiary">Technologies</span>
-			<h3 class="typ-heading-primary">Extensive List of Supported Languages and Frameworks</h3>
-			<p class="typ-subtext">A myriad of technologies, to minimize the stress of choosing a framework for your next application.</p>
-			</div>
-		</div>
-		<div class="split-section">
-			sec 2
-		</div>
-	</div>
+	<SupportedTechnologyShowcase {technologies} />
 </Section>
 
 <style lang="scss">
-
-	.split {
-		display:grid;
-		grid-template-columns:repeat(2,1fr);
-		grid-gap:$gutter;
-
-		// temp
-		min-height: calc(100vh - var(--nav-height));
-		padding:5rem 0;
-
-
-		&-section {
-		}
-	}
 	.header {
 		display: flex;
 		flex-direction: column;

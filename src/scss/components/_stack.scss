@@ -7,4 +7,7 @@
 	&-10 {
 		gap: 10px;
 	}
+	&-gutter {
+		gap: $gutter;
+	}
 }

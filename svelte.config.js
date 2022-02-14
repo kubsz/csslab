@@ -7,7 +7,10 @@ const config = {
 	kit: {
 		adapter: vercel(),
 		vite: {
-			plugins: [svg()]
+			plugins: [svg()],
+			optimizeDeps: {
+				include: ['highlight.js/lib/core']
+			}
 		}
 	},
 	preprocess: [
