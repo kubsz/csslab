@@ -47,6 +47,11 @@
 			}
 		}
 
+		&.light {
+			background-color: rgba(0, 0, 0, 0.2);
+			color: rgba(0, 0, 0, 0.7);
+		}
+
 		&.large {
 			font-size: 1.6rem;
 		}

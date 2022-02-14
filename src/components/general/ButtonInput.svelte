@@ -19,19 +19,16 @@
 		input {
 			padding: $gutter;
 			color: $col-light-1;
+			font-size: 1.4rem;
 		}
 
 		button {
 			background-color: $col-primary;
 			padding: 10px 15px;
 			color: $col-dark-3;
-			// margin: 0.5rem;
-			border-radius: 0 $radius $radius 0;
 
-			// font-weight: 900;
-			// font-size: 1.2rem;
-			// letter-spacing: 1px;
-			// text-transform: uppercase;
+			font-size: 1.4rem;
+			border-radius: 0 $radius $radius 0;
 
 			font-weight: 600;
 			cursor: pointer;

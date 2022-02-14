@@ -117,7 +117,7 @@
 
 <style lang="scss">
 	.footer-padding {
-		height: 100px;
+		height: 80px;
 	}
 	footer {
 		background-color: $col-dark-1;
@@ -132,6 +132,7 @@
 			position: absolute;
 			bottom: calc(100% - 5px);
 			left: 0;
+			z-index: -1;
 		}
 
 		.logo-container {

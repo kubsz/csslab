@@ -7,6 +7,7 @@
 	import Section from './../components/layout/Section.svelte';
 	import Button from '../components/general/Button.svelte';
 	import SupportedTechnologyShowcase from '../components/misc/SupportedTechnologyShowcase.svelte';
+	import Jumbotron from '../components/general/Jumbotron.svelte';
 
 	const technologies = [
 		{
@@ -63,7 +64,38 @@
 	<SupportedTechnologyShowcase {technologies} />
 </Section>
 
+<Jumbotron modifiers={['dark', 'center']}>
+	<div class="jumbo-container">
+		<div class="jumbo-main">
+			<span class="jumbo-text">Want to contribute to CSSLab?</span>
+			<span class="jumbo-text">Let's get started...</span>
+		</div>
+	</div>
+</Jumbotron>
+
 <style lang="scss">
+	.jumbo-container {
+		display: flex;
+		align-items: center;
+		width: calc(100% - #{$gutter * 10});
+
+		.jumbo-main {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+		}
+		.jumbo-text {
+			font-size: 42px;
+			font-family: 'InterSemiBold';
+			color: $col-light-1;
+
+			&:last-of-type {
+				font-weight: 400;
+				color: $col-dark-1;
+			}
+		}
+	}
+
 	.header {
 		display: flex;
 		flex-direction: column;
