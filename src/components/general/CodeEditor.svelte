@@ -1,5 +1,6 @@
 <script>
-	import { html as formatHTML, js as formatJS, css as formatCSS } from 'js-beautify';
+	import beautify from 'js-beautify';
+	const { html: formatHTML, js: formatJS, css: formatCSS } = beautify;
 	import Icon from '@iconify/svelte';
 	import Highlight from 'svelte-highlight';
 	import javascript from 'svelte-highlight/src/languages/javascript';
