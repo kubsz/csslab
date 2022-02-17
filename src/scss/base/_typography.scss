@@ -2,6 +2,11 @@
 	font-size: 3.6rem;
 	font-weight: 900;
 	font-family: 'InterSemiBold';
+
+	&.bold {
+		font-size: 5rem;
+		letter-spacing: 0;
+	}
 }
 .typ-heading-secondary {
 	font-family: 'InterSemiBold';
@@ -14,6 +19,11 @@
 	font-size: 1.2rem;
 	font-weight: 900;
 	color: $col-dark-5;
+	font-family: 'InterSemiBold';
+
+	&.large {
+		font-size: 1.4rem;
+	}
 }
 
 .typ-subtext {

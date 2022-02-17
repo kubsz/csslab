@@ -3,18 +3,41 @@
 	pointer-events: none !important;
 }
 
+.u-color-primary {
+	color: $col-primary !important;
+}
 .u-color-primary-dark {
-	color: darken($col-primary, 20%);
+	color: darken($col-primary, 20%) !important;
+}
+
+.u-color-secondary {
+	color: $col-secondary !important;
+}
+.u-color-secondary-dark {
+	color: darken($col-secondary, 20%) !important;
 }
 
 .u-text-shadow {
-	text-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.06) !important;
 }
 
 .u-uppercase {
-	text-transform: uppercase;
+	text-transform: uppercase !important;
+}
+
+.u-weight {
+	&-700 {
+		font-weight: 700;
+	}
+	&-900 {
+		font-weight: 900;
+	}
 }
 
 .u-center-text {
-	text-align: center;
+	text-align: center !important;
+}
+
+.u-center {
+	@include flexCenter;
 }

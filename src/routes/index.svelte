@@ -1,4 +1,5 @@
 <script>
+	import IPhone from './../components/general/IPhone.svelte';
 	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
 	import svelteIcon from '@iconify/icons-cib/svelte.js';
 	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
@@ -8,6 +9,7 @@
 	import Button from '../components/general/Button.svelte';
 	import SupportedTechnologyShowcase from '../components/misc/SupportedTechnologyShowcase.svelte';
 	import Jumbotron from '../components/general/Jumbotron.svelte';
+	import MacScreen from '../components/general/MacScreen.svelte';
 
 	const technologies = [
 		{
@@ -38,7 +40,7 @@
 	];
 </script>
 
-<Section dark texture>
+<Section theme="dark" texture>
 	<div class="header">
 		<p class="top-text initanim initanim-s-600 initanim-d-200">
 			Language support for
@@ -64,16 +66,87 @@
 	<SupportedTechnologyShowcase {technologies} />
 </Section>
 
-<Jumbotron modifiers={['dark', 'center']}>
+<Section theme="lightish" margin modifiers={['padding-vertical-10']}>
+	<div class="responsive-section">
+		<span class="typ-heading-tertiary u-color-secondary u-weight-900 large">Fully Responsive Components</span>
+		<h2 class="typ-heading-primary bold">Customizable Components Designed For All Devices</h2>
+		<p class="typ-subtext">
+			Enjoy complete freedom of component choice knowing they will respond to all devices and screen sizes. Choose between a mobile first
+			and desktop first design practice.
+		</p>
+
+		<div class="graphic">
+			<div class="mac">
+				<MacScreen>
+					<div class="u-center" style="height:100%">mac content here</div>
+				</MacScreen>
+			</div>
+			<div class="iphone">
+				<IPhone><div class="u-center" style="height:100%">iphone content here</div></IPhone>
+			</div>
+		</div>
+	</div>
+</Section>
+<Section margin>
+	<div class="placeholder" />
+</Section>
+
+<!-- <Jumbotron modifiers={['dark', 'center']}>
 	<div class="jumbo-container">
 		<div class="jumbo-main">
 			<span class="jumbo-text">Want to contribute to CSSLab?</span>
 			<span class="jumbo-text">Let's get started...</span>
 		</div>
 	</div>
-</Jumbotron>
-
+</Jumbotron> -->
 <style lang="scss">
+	.graphic {
+		margin-top: $gutter * 2;
+		height: 650px;
+		width: 100%;
+		position: relative;
+
+		width: 90%;
+		.mac,
+		.iphone {
+			position: absolute;
+		}
+
+		.mac {
+			right: 100%;
+			left: 0;
+			width: calc(100% - 100px);
+			height: calc(100% - 100px);
+		}
+
+		.iphone {
+			height: 500px;
+			width: 240px;
+
+			bottom: 0;
+			right: 0;
+		}
+	}
+	.responsive-section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: $gutter;
+
+		min-height: 700px;
+		text-align: center;
+
+		& > h2 {
+			max-width: 900px;
+		}
+
+		& > p {
+			width: 750px;
+		}
+	}
+	.placeholder {
+		min-height: 50vh;
+	}
 	.jumbo-container {
 		display: flex;
 		align-items: center;

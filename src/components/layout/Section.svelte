@@ -1,17 +1,21 @@
 <script>
 	export let texture;
-	export let dark;
+	export let theme = 'light';
+	export let padding = null;
+	export let modifiers = [];
 
 	let mousePosition = { left: 0, top: 0 };
 
 	const handleMouseMove = (e) => {
-		if (!dark) return;
+		if (!texture) return;
 		mousePosition = { left: e.clientX, top: e.clientY };
 	};
+
+	console.log(padding);
 </script>
 
 <svelte:window on:mousemove={handleMouseMove} />
-<div class="section" class:dark>
+<div class="section {theme}{modifiers ? ` ${modifiers.join(' ')}` : ''}" style={padding ? `padding:10rem 0` : ''}>
 	<div class="section-content margin">
 		<slot />
 	</div>
@@ -27,8 +31,15 @@
 		position: relative;
 		z-index: 1;
 
+		&.padding-vertical-10 {
+			padding: 10rem 0;
+		}
+
 		&.dark {
 			background-color: $col-dark-1;
+		}
+		&.lightish {
+			background-color: $col-light-2;
 		}
 	}
 	.section-content {
@@ -62,7 +73,7 @@
 			opacity: 1;
 		}
 		.texture-opening {
-			background-image: radial-gradient(rgba($col-dark-1, .5), $col-dark-1 20vw);
+			background-image: radial-gradient(rgba($col-dark-1, 0.5), $col-dark-1 20vw);
 			background-position: center;
 			width: 200vw;
 			height: 200vw;
