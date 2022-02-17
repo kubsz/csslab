@@ -1,6 +1,13 @@
 <script>
+	import { fly } from 'svelte/transition';
+
 	export let href;
 	export let modifiers = [];
+
+	// showcaseTransition only set true when being used on Homepage technology showcase
+	export let showcaseTransition = false;
+
+	const animate = (node, args) => (args.cond ? fly(node, args) : null);
 
 	let classes = ['btn', ...modifiers].join(' ');
 </script>
@@ -8,7 +15,9 @@
 {#if href}
 	<a {href} class={classes}> <slot /></a>
 {:else}
-	<button class={classes}> <slot /></button>
+	<button class={classes} in:animate={{ x: 220, cond: showcaseTransition, delay: 150 }} out:animate={{ x: -220, cond: showcaseTransition }}>
+		<slot /></button
+	>
 {/if}
 
 <style lang="scss">

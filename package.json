@@ -24,6 +24,7 @@
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-vercel": "next",
     "@sveltejs/kit": "next",
+    "axios": "^0.26.0",
     "js-beautify": "^1.14.0",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",

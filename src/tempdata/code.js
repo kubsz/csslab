@@ -9,76 +9,7 @@ export default {
 			name: 'svelte',
 			color: [247, 60, 0],
 			icon: svelteIcon
-		},
-		files: [
-			{
-				name: 'index.svelte',
-				language: 'javascript',
-				content: `<scripte>
-	import Button from './Button.svelte';
-</scripte>
-
-<Button>Hello World</Button>`
-			},
-			{
-				name: 'Button.svelte',
-				language: 'javascript',
-				content: `<scripte>
-	export let href;
-	export let modifiers = [];
-
-	let classes = ['btn', ...modifiers].join(' ');
-</scripte>
-
-{#if href}
-	<a {href} class={classes}> <slot /></a>
-{:else}
-	<button class={classes}> <slot /></button>
-{/if}
-
-<style lang="scss">
-	.btn {
-		background-color: $col-dark-2;
-		color: $col-light-3;
-		padding: 1em 1.5em;
-		font-size: 1.4rem;
-		font-weight: 500;
-		border-radius: $radius;
-
-		cursor: pointer;
-		transition: all 0.15s ease;
-
-		&:hover {
-			background-color: $col-dark-3;
-			color: $col-light-2;
 		}
-
-		&.primary {
-			background-color: $col-primary;
-			color: $col-dark-2;
-			font-weight: 700;
-			&:hover {
-				background-color: lighten($col-primary, 5%);
-				color: $col-dark-1;
-			}
-		}
-
-		&.secondary {
-			background-color: $col-secondary;
-			color: $col-light-1;
-			&:hover {
-				background-color: lighten($col-secondary, 5%);
-				color: $col-light-1;
-			}
-		}
-
-		&.large {
-			font-size: 1.6rem;
-		}
-	}
-</style>`
-			}
-		]
 	},
 	react: {
 		language: {

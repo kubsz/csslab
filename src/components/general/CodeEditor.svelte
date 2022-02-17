@@ -8,51 +8,52 @@
 	import css from 'svelte-highlight/src/languages/css';
 	import 'svelte-highlight/src/styles/base16-nord.css';
 
-	export let code;
+	export let tabs;
+	export let config;
 
 	let activeTabIndex = 0;
 
-	const formatCode = ({ language, content }) => {
+	const formatCode = ({ language, code }) => {
 		let obj = {};
 		switch (language) {
 			case 'javascript':
-				obj = { code: formatJS(content), language: javascript };
+				obj = { code: formatJS(code), language: javascript };
 			case 'html':
-				obj = { code: formatHTML(content), language: xml };
+				obj = { code: formatHTML(code), language: xml };
 			case 'css':
-				obj = { code: formatCSS(content), language: css };
+				obj = { code: formatCSS(code), language: css };
 			default:
-				obj = { code: content, language: javascript };
+				obj = { code: code, language: javascript };
 		}
 		return obj;
 	};
 
-	$: activeWindow = formatCode(code.files[activeTabIndex]);
+	$: activeWindow = formatCode(tabs[activeTabIndex]);
 
 	$: {
-		code;
+		tabs;
 		activeTabIndex = 0;
 	}
 </script>
 
-<div class="code-editor" data-language={code.language.name} style="--col-lang: {code.language.color}">
+<div class="code-editor" data-language={config.language.name} style="--col-lang: {config.language.color}">
 	<div class="mac-buttons">
 		<div class="circle red" />
 		<div class="circle yellow" />
 		<div class="circle green" />
 	</div>
 	<ul class="tabs">
-		{#each code.files as file, i}
+		{#each tabs as file, i}
 			<li>
 				<button on:click={() => (activeTabIndex = i)} class:active={activeTabIndex === i}>
-					<Icon icon={code.language.icon} />
+					<Icon icon={config.language.icon} />
 					<span>{file.name}</span>
 				</button>
 			</li>
 		{/each}
 	</ul>
 	<div class="code">
-		<Highlight language={activeWindow.language} code={activeWindow.code} />
+		<Highlight language={config.language} code={activeWindow.code} />
 	</div>
 </div>
 

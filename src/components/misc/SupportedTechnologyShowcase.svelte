@@ -1,33 +1,80 @@
 <script>
+	import axios from 'axios';
+	import { browser } from '$app/env';
+
+	import { fade } from 'svelte/transition';
 	import Frame from '../general/Frame.svelte';
 	import IconButtons from '../general/IconButtons.svelte';
 
-	import code from '../../tempdata/code';
+	import languages from '../../tempdata/code';
 	import CodeEditor from '../general/CodeEditor.svelte';
+
 	import Button from '../general/Button.svelte';
+	import IconInput from '../general/IconInput.svelte';
+	import Hamburger from '../general/Hamburger.svelte';
+	import SelectDropdown from '../general/SelectDropdown.svelte';
+
+	import svelteIcon from '@iconify/icons-cib/svelte.js';
 
 	export let technologies = [];
-
-	let technology = 'react';
 
 	const components = [
 		{
 			label: 'ClassicButton',
-			value: 'classicbutton'
+			value: 'classicbutton',
+			component: Button,
+			path: '/general/Button.svelte',
+			props: {},
+			slot: 'Welcome'
 		},
 		{
 			label: 'IconInput',
-			value: 'iconinput'
+			value: 'iconinput',
+			component: IconInput,
+			path: '/general/IconInput.svelte',
+			props: {
+				placeholder: 'Enter some text...'
+			}
 		},
 		{
-			label: 'Cheeseburger',
-			value: 'cheeseburger'
+			label: 'Hamburger',
+			value: 'hamburger',
+			component: Hamburger,
+			path: '/general/Hamburger.svelte',
+			props: {}
 		},
 		{
 			label: 'SelectDropdown',
-			value: 'selectdropdown'
+			value: 'selectdropdown',
+			component: SelectDropdown,
+			path: '/general/SelectDropdown.svelte',
+			props: {
+				placeholder: 'lol 3'
+			}
 		}
 	];
+
+	let activeTechnology = 'svelte';
+	let activeComponent = 'classicbutton';
+	let componentCode = '';
+
+	$: componentObject = components.find((comp) => comp.value === activeComponent);
+	$: {
+		getComponentCode(componentObject.path);
+	}
+
+	const getComponentCode = async (path) => {
+		console.log('getting');
+		if (!browser) {
+			componentCode = 'lol';
+			return;
+		}
+
+		const res = await axios.post('/api/get-component-code', { path });
+		const { file } = res.data;
+
+		componentCode = file;
+	};
 </script>
 
 <div class="split break-m align-center double-gutter">
@@ -39,7 +86,8 @@
 			<div class="technology-buttons">
 				<h5 class="typ-heading-secondary">Choose Technology</h5>
 				<IconButtons
-					on:update={(e) => (technology = e.detail.value)}
+					requireOne
+					on:update={(e) => (activeTechnology = e.detail.value)}
 					modifiers={['wrap', 'square']}
 					items={technologies.map((x) => ({
 						label: x.title,
@@ -51,16 +99,20 @@
 			</div>
 			<div class="technology-buttons">
 				<h5 class="typ-heading-secondary">Choose Component</h5>
-				<IconButtons modifiers={['wrap']} items={components} />
+				<IconButtons requireOne on:update={(e) => (activeComponent = e.detail.value)} modifiers={['wrap']} items={components} />
 			</div>
 		</div>
 	</div>
 	<div class="split-section">
 		<div class="stack stack-gutter">
-			<Frame modifiers={['center']}>
-				<Button>Explore Components</Button>
-			</Frame>
-			<CodeEditor code={code[technology]} />
+			<div class="u-overflow-hidden">
+				<Frame modifiers={['center', 'overflow-hidden']}>
+					<svelte:component this={componentObject.component} showcaseTransition={true} {...componentObject.props}>
+						{componentObject.slot}
+					</svelte:component>
+				</Frame>
+			</div>
+			<CodeEditor config={languages[activeTechnology]} tabs={[{ name: 'lol.svelte', language: 'javascript', code: componentCode }]} />
 		</div>
 	</div>
 </div>

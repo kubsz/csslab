@@ -87,9 +87,9 @@
 		</div>
 	</div>
 </Section>
-<Section margin>
+<!-- <Section margin>
 	<div class="placeholder" />
-</Section>
+</Section> -->
 
 <!-- <Jumbotron modifiers={['dark', 'center']}>
 	<div class="jumbo-container">

@@ -16,11 +16,18 @@
 		padding: $gutter;
 		color: $col-light-3;
 
+		&.overflow-hidden {
+			overflow: hidden;
+		}
+
 		&.center {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 		}
+	}
+	:global(.frame > *) {
+		position: absolute;
 	}
 </style>

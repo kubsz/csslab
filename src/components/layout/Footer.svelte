@@ -125,6 +125,7 @@
 
 		color: $col-light-3;
 		position: relative;
+		z-index: 5;
 
 		.wave {
 			transform-origin: bottom;

@@ -5,13 +5,19 @@
 	export let items;
 	export let multiple = false;
 	export let modifiers = [];
+	export let requireOne = false;
 
-	let active = multiple ? [] : null;
+	let active = multiple ? [] : requireOne ? items[0].value : null;
 
+	const fireEvent = () => dispatch('update', { value: active });
 	const handleClick = (value) => {
-		if (!multiple) active = active === value ? null : value;
+		if (multiple) return;
 
-		dispatch('update', { value: active });
+		if (active === value && requireOne) return;
+
+		active = active === value ? null : value;
+
+		fireEvent();
 	};
 
 	$: classes = modifiers.join(' ');
