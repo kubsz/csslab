@@ -7,10 +7,10 @@
 
 	import CodeEditor from '../general/CodeEditor.svelte';
 
-	import ExampleButtonShowcase from '../../csslab/components/svelte/ExampleButton/index.svelte';
-	import HamburgerShowcase from '../../csslab/components/svelte/Hamburger/index.svelte';
-	import IconInputShowcase from '../../csslab/components/svelte/IconInput/index.svelte';
-	import SelectDropdownShowcase from '../../csslab/components/svelte/SelectDropdown/index.svelte';
+	import ExampleButtonShowcase from '../../../static/csslab/components/svelte/ExampleButton/index.svelte';
+	import HamburgerShowcase from '../../../static/csslab/components/svelte/Hamburger/index.svelte';
+	import IconInputShowcase from '../../../static/csslab/components/svelte/IconInput/index.svelte';
+	import SelectDropdownShowcase from '../../../static/csslab/components/svelte/SelectDropdown/index.svelte';
 
 	export let technologies = [];
 
@@ -27,8 +27,7 @@
 
 	$: componentObject = showcaseComponents.find((comp) => comp.value === activeComponent);
 	$: {
-		console.log(activeTechnology);
-		getComponentCode(`/components/${activeTechnology}/${activeComponent}/`);
+		if (activeTechnology && activeComponent) getComponentCode(`/components/${activeTechnology}/${activeComponent}/`);
 	}
 
 	const getComponentCode = async (path) => {

@@ -4,7 +4,7 @@ export const post = async ({ request }) => {
 	let { path, technology } = await request.json();
 	if (!path) return { body: 'unable to find' };
 
-	const wholePath = `${process.cwd()}/src/csslab/${path}`;
+	const wholePath = `${process.cwd()}/static/csslab/${path}`;
 
 	let fileNames = [];
 
@@ -16,7 +16,6 @@ export const post = async ({ request }) => {
 		console.log(err);
 	}
 
-	console.log(fileNames);
 	const filePromises = fileNames.map(async (file) => {
 		const splitByDot = file.split('.');
 		const extension = splitByDot[splitByDot.length - 1];
@@ -27,6 +26,7 @@ export const post = async ({ request }) => {
 			extension
 		};
 	});
+	``;
 	const files = await Promise.all(filePromises);
 
 	return {
