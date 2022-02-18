@@ -4,7 +4,7 @@ export const post = async ({ request }) => {
 	let { path, technology } = await request.json();
 	if (!path) return { body: 'unable to find' };
 
-	const wholePath = `${process.cwd()}/static/csslab/${path}`;
+	const wholePath = `${process.cwd()}/static/csslab${path}`;
 
 	let fileNames = [];
 
@@ -14,6 +14,9 @@ export const post = async ({ request }) => {
 		});
 	} catch (err) {
 		console.log(err);
+		return {
+			err
+		};
 	}
 
 	const filePromises = fileNames.map(async (file) => {
