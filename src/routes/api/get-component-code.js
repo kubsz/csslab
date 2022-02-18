@@ -31,7 +31,12 @@ export const post = async ({ request }) => {
 
 	return {
 		body: {
-			files
+			files,
+			data: {
+				processCwd: process.cwd(),
+				path: wholePath,
+				fileNames
+			}
 		}
 	};
 };
