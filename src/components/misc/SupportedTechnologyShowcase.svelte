@@ -2,78 +2,45 @@
 	import axios from 'axios';
 	import { browser } from '$app/env';
 
-	import { fade } from 'svelte/transition';
 	import Frame from '../general/Frame.svelte';
 	import IconButtons from '../general/IconButtons.svelte';
 
-	import languages from '../../tempdata/code';
 	import CodeEditor from '../general/CodeEditor.svelte';
 
-	import Button from '../general/Button.svelte';
-	import IconInput from '../general/IconInput.svelte';
-	import Hamburger from '../general/Hamburger.svelte';
-	import SelectDropdown from '../general/SelectDropdown.svelte';
-
-	import svelteIcon from '@iconify/icons-cib/svelte.js';
+	import ExampleButtonShowcase from '../../csslab/components/svelte/ExampleButton/index.svelte';
+	import HamburgerShowcase from '../../csslab/components/svelte/Hamburger/index.svelte';
+	import IconInputShowcase from '../../csslab/components/svelte/IconInput/index.svelte';
+	import SelectDropdownShowcase from '../../csslab/components/svelte/SelectDropdown/index.svelte';
 
 	export let technologies = [];
 
-	const components = [
-		{
-			label: 'ClassicButton',
-			value: 'classicbutton',
-			component: Button,
-			path: '/general/Button.svelte',
-			props: {},
-			slot: 'Welcome'
-		},
-		{
-			label: 'IconInput',
-			value: 'iconinput',
-			component: IconInput,
-			path: '/general/IconInput.svelte',
-			props: {
-				placeholder: 'Enter some text...'
-			}
-		},
-		{
-			label: 'Hamburger',
-			value: 'hamburger',
-			component: Hamburger,
-			path: '/general/Hamburger.svelte',
-			props: {}
-		},
-		{
-			label: 'SelectDropdown',
-			value: 'selectdropdown',
-			component: SelectDropdown,
-			path: '/general/SelectDropdown.svelte',
-			props: {
-				placeholder: 'lol 3'
-			}
-		}
+	const showcaseComponents = [
+		{ label: 'Button', value: 'ExampleButton', component: ExampleButtonShowcase },
+		{ label: 'IconInput', value: 'IconInput', component: IconInputShowcase },
+		{ label: 'Hamburger', value: 'Hamburger', component: HamburgerShowcase },
+		{ label: 'SelectDropdown', value: 'selectdropdown', component: SelectDropdownShowcase }
 	];
 
 	let activeTechnology = 'svelte';
-	let activeComponent = 'classicbutton';
-	let componentCode = '';
+	let activeComponent = 'ExampleButton';
+	let componentFiles = '';
 
-	$: componentObject = components.find((comp) => comp.value === activeComponent);
+	$: componentObject = showcaseComponents.find((comp) => comp.value === activeComponent);
 	$: {
-		getComponentCode(componentObject.path);
+		console.log(activeTechnology);
+		getComponentCode(`/components/${activeTechnology}/${activeComponent}/`);
 	}
 
 	const getComponentCode = async (path) => {
-		console.log('getting');
 		if (!browser) {
 			componentCode = 'lol';
 			return;
 		}
 
-		const res = await axios.post('/api/get-component-code', { path });
-		const { file } = res.data;
+		const res = await axios.post('/api/get-component-code', { path, technology: activeTechnology });
 
-		componentCode = file;
+		const { files } = res.data;
+		componentFiles = files;
 	};
 </script>
 
@@ -87,6 +54,7 @@
 				<h5 class="typ-heading-secondary">Choose Technology</h5>
 				<IconButtons
 					requireOne
+					defaultValue={activeTechnology}
 					on:update={(e) => (activeTechnology = e.detail.value)}
 					modifiers={['wrap', 'square']}
 					items={technologies.map((x) => ({
@@ -99,7 +67,13 @@
 			</div>
 			<div class="technology-buttons">
 				<h5 class="typ-heading-secondary">Choose Component</h5>
-				<IconButtons requireOne on:update={(e) => (activeComponent = e.detail.value)} modifiers={['wrap']} items={components} />
+				<IconButtons
+					requireOne
+					defaultValue={activeComponent}
+					on:update={(e) => (activeComponent = e.detail.value)}
+					modifiers={['wrap']}
+					items={showcaseComponents}
+				/>
 			</div>
 		</div>
 	</div>
@@ -112,7 +86,7 @@
 					</svelte:component>
 				</Frame>
 			</div>
-			<CodeEditor config={languages[activeTechnology]} tabs={[{ name: 'lol.svelte', language: 'javascript', code: componentCode }]} />
+			<CodeEditor {technologies} technologyId={activeTechnology} tabs={componentFiles} />
 		</div>
 	</div>
 </div>

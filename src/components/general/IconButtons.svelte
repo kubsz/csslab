@@ -2,12 +2,13 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 	import Icon from '@iconify/svelte';
-	export let items;
+	export let items = [];
 	export let multiple = false;
 	export let modifiers = [];
 	export let requireOne = false;
+	export let defaultValue = null;
 
-	let active = multiple ? [] : requireOne ? items[0].value : null;
+	let active = multiple ? [] : requireOne ? (defaultValue ? items.find((x) => x.value === defaultValue).value : items[0].value) : null;
 
 	const fireEvent = () => dispatch('update', { value: active });
 	const handleClick = (value) => {

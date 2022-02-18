@@ -1,7 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 
-	export let href;
+	export let href = null;
 	export let modifiers = [];
 
 	// showcaseTransition only set true when being used on Homepage technology showcase

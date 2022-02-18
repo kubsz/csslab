@@ -14,24 +14,28 @@
 	const technologies = [
 		{
 			title: 'React',
+			value: 'react',
 			link: '/technologies/react',
 			icon: reactFill,
 			color: [110, 208, 241]
 		},
 		{
 			title: 'Vue',
+			value: 'vue',
 			link: '/technologies/vue',
 			icon: vueFill,
 			color: [63, 185, 132]
 		},
 		{
 			title: 'Svelte',
+			value: 'svelte',
 			link: '/technologies/svelte',
 			icon: svelteIcon,
 			color: [242, 57, 0]
 		},
 		{
 			title: 'JavaScript',
+			value: 'javascript',
 			link: '/technologies/javascript',
 			icon: javascriptFill,
 			color: [218, 185, 45],
@@ -62,7 +66,7 @@
 		</div>
 	</div>
 </Section>
-<Section margin>
+<Section>
 	<SupportedTechnologyShowcase {technologies} />
 </Section>
 

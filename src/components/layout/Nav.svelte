@@ -23,7 +23,7 @@
 	let navRef;
 
 	export let colors = null;
-	export let dark;
+	export let dark = false;
 
 	let scrollY = 0;
 

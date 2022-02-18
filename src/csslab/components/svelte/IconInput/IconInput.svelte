@@ -1,21 +1,12 @@
 <script>
-	import lockAlt from '@iconify/icons-bxs/lock-alt';
+	import lockAlt from '@iconify/icons-bxs/lock-alt.js';
 	import Icon from '@iconify/svelte';
-	import { fly } from 'svelte/transition';
 
 	export let placeholder;
 	export let icon = lockAlt;
-	// showcaseTransition only set true when being used on Homepage technology showcase
-	export let showcaseTransition = false;
-
-	const animate = (node, args) => (args.cond ? fly(node, args) : null);
 </script>
 
-<div
-	class="input-container"
-	in:animate={{ x: 220, cond: showcaseTransition, delay: 150 }}
-	out:animate={{ x: -220, cond: showcaseTransition }}
->
+<div class="input-container">
 	<Icon {icon} />
 	<input {placeholder} />
 </div>
