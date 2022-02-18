@@ -15,7 +15,7 @@ export const post = async ({ request }) => {
 	} catch (err) {
 		console.log(err);
 		return {
-			err
+			body: err
 		};
 	}
 
