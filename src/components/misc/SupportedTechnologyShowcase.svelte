@@ -7,10 +7,10 @@
 
 	import CodeEditor from '../general/CodeEditor.svelte';
 
-	import ExampleButtonShowcase from '../../../static/csslab/components/svelte/ExampleButton/index.svelte';
-	import HamburgerShowcase from '../../../static/csslab/components/svelte/Hamburger/index.svelte';
-	import IconInputShowcase from '../../../static/csslab/components/svelte/IconInput/index.svelte';
-	import SelectDropdownShowcase from '../../../static/csslab/components/svelte/SelectDropdown/index.svelte';
+	import ExampleButtonShowcase from '../../../static/CSSLAB_FILES/components/svelte/ExampleButton/index.svelte';
+	import HamburgerShowcase from '../../../static/CSSLAB_FILES/components/svelte/Hamburger/index.svelte';
+	import IconInputShowcase from '../../../static/CSSLAB_FILES/components/svelte/IconInput/index.svelte';
+	import SelectDropdownShowcase from '../../../static/CSSLAB_FILES/components/svelte/SelectDropdown/index.svelte';
 
 	export let technologies = [];
 
@@ -38,8 +38,9 @@
 
 		const res = await axios.post('/api/get-component-code', { path, technology: activeTechnology });
 
-		const { files } = res.data;
-		componentFiles = files;
+		console.log(res);
+		// const { files } = res.data;
+		// componentFiles = files;
 	};
 </script>
 
