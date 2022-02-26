@@ -10,6 +10,8 @@
 </script>
 
 <script>
+	import { fade } from 'svelte/transition';
+	import { Modals, closeModal } from 'svelte-modals';
 	import Footer from '../components/layout/Footer.svelte';
 	import Nav from '../components/layout/Nav.svelte';
 
@@ -17,6 +19,9 @@
 	let navHeight = 94;
 </script>
 
+<Modals>
+	<div transition:fade={{ duration: 400 }} slot="backdrop" class="backdrop" on:click={closeModal} />
+</Modals>
 <div class="root" style="--nav-height: {navHeight}px">
 	<Nav on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
 	<div class="content">
@@ -48,5 +53,16 @@
 			width: 100%;
 			background-color: $col-dark-1;
 		}
+	}
+
+	.backdrop {
+		background-color: rgba(0, 0, 0, 0.2);
+		backdrop-filter: blur(20px);
+		z-index: 99;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 </style>

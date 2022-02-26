@@ -173,7 +173,7 @@
 	nav {
 		position: fixed;
 		width: 100%;
-		z-index: 3;
+		z-index: 6;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

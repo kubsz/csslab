@@ -118,6 +118,7 @@
 <style lang="scss">
 	.footer-padding {
 		height: 80px;
+		background-color:$col-light-2;;
 	}
 	footer {
 		background-color: $col-dark-1;
@@ -134,6 +135,7 @@
 			bottom: calc(100% - 5px);
 			left: 0;
 			z-index: -1;
+			width:100%;
 		}
 
 		.logo-container {
@@ -153,11 +155,18 @@
 		.main {
 			display: flex;
 			justify-content: space-between;
-			margin: $gutter 0;
+			flex-wrap:wrap;
+			gap:$gutter * 2;
+			margin: $gutter * 2 0;
 
 			.footer-links {
 				display: flex;
 				gap: $gutter * 2;
+
+				@include respond(1600) {
+					order:5;
+					flex:1 1 100%;
+				}
 
 				.links-section {
 					min-width: 15rem;

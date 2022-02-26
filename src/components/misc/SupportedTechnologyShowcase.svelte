@@ -39,13 +39,13 @@
 		const res = await axios.post('/api/get-component-code', { path, technology: activeTechnology });
 
 		console.log(res);
-		// const { files } = res.data;
-		// componentFiles = files;
+		const { files } = res.data;
+		componentFiles = files;
 	};
 </script>
 
-<div class="split break-m align-center double-gutter">
-	<div class="split-section">
+<div class="row break-992 align-center double-gutter full-height">
+	<div class="col col-5">
 		<div class="stack stack-10">
 			<span class="typ-heading-tertiary">Technologies</span>
 			<h3 class="typ-heading-primary">Extensive List of Supported Languages and Frameworks</h3>
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="split-section">
+	<div class="col col-5">
 		<div class="stack stack-gutter">
 			<div class="u-overflow-hidden">
 				<Frame modifiers={['center', 'overflow-hidden']}>

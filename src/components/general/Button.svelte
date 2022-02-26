@@ -56,6 +56,11 @@
 			}
 		}
 
+		&.block {
+			display: block;
+			width: 100%;
+		}
+
 		&.light {
 			background-color: rgba(0, 0, 0, 0.2);
 			color: rgba(0, 0, 0, 0.7);
