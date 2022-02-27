@@ -1,9 +1,15 @@
 <script>
 	import { scale, fade } from 'svelte/transition';
+
+	import Icon from '@iconify/svelte';
+	import closeOutline from '@iconify/icons-eva/close-outline.js';
 </script>
 
 <div class="background" transition:fade>
 	<div class="modal" transition:scale>
+		<button class="close-button">
+			<Icon icon={closeOutline} />
+		</button>
 		<slot />
 	</div>
 </div>
@@ -20,6 +26,7 @@
 		align-items: center;
 
 		background-color: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(10px);
 
 		z-index: 100;
 

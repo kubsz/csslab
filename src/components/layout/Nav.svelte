@@ -8,6 +8,9 @@
 
 	import Logo from '../../assets/logo-light.svg';
 
+	import LoginModal from '../modals/LoginModal.svelte';
+	import SignUpModal from '../modals/SignUpModal.svelte';
+
 	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
 	import hamburgerIcon from '@iconify/icons-mdi/hamburger.js';
 	import searchIcon from '@iconify/icons-charm/search.js';
@@ -137,13 +140,21 @@
 		{
 			label: 'Sign In',
 			link: '/sign-in',
-			right: true
+			right: true,
+			modalConfig: {
+				component: LoginModal,
+				props: {}
+			}
 		},
 		{
 			label: 'Sign Up',
 			link: '/sign-up',
 			right: true,
-			fill: true
+			fill: true,
+			modalConfig: {
+				component: SignUpModal,
+				props: {}
+			}
 		}
 	];
 
@@ -164,7 +175,7 @@
 	</ul>
 	<ul>
 		{#each options.filter((opt) => opt.right) as option}
-			<NavItem label={option.label} link={option.link} fill={option.fill} />
+			<NavItem label={option.label} link={option.link} fill={option.fill} modalConfig={option.modalConfig} />
 		{/each}
 	</ul>
 </nav>

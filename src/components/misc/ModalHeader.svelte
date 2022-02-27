@@ -29,7 +29,7 @@
 
 			background-color: rgba($col-secondary, 0.2);
 			border: 1px solid rgba($col-secondary, 0.3);
-			color: darken($col-secondary, 10%);
+			color: darken($col-secondary, 0%);
 			border-radius: 50%;
 
 			:global(svg) {

@@ -9,12 +9,7 @@
 	export let label, link;
 	export let dropdown = null;
 	export let fill = false;
-	export let modalConfig = {
-		component: LoginModal,
-		props: {
-			test: 'ho'
-		}
-	};
+	export let modalConfig;
 
 	let dropdownActive = false;
 </script>
