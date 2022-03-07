@@ -54,9 +54,10 @@
 			&.fill {
 				background-color: $col-primary;
 				color: $col-dark-1;
-				padding: 1rem;
+				padding: 1rem 1.2rem;
 				border-radius: $radius;
 				font-weight: 700;
+				font-size: 1.4rem;
 
 				&:hover {
 					background-color: lighten($col-primary, 10%);

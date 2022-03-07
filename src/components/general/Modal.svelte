@@ -40,5 +40,15 @@
 			pointer-events: all;
 			padding: $gutter;
 		}
+
+		.close-button {
+			cursor: pointer;
+			color: $col-dark-5;
+			transition: 0.1s ease;
+
+			&:hover {
+				color: $col-dark-1;
+			}
+		}
 	}
 </style>
