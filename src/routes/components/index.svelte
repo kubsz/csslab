@@ -1,29 +1,81 @@
 <script>
 	import Section from '../../components/layout/Section.svelte';
+	import FilterSplit from '../../components/general/FilterSplit.svelte';
+	import FilterSearch from '../../components/general/FilterSearch.svelte';
+	import FrameCard from '../../components/general/FrameCard.svelte';
 
-	const options = [
-		{ label: 'Buttons', value: 'buttons', icon: '' },
-		{ label: 'Inputs', value: 'inputs', icon: '' },
-		{ label: 'Dropdowns', value: 'dropdowns', icon: '' },
-		{ label: 'Hamburgers', value: 'hamburgers', icon: '' },
-		{ label: 'Checkboxes', value: 'checkboxes', icon: '' }
+	import buttonIcon from '@iconify/icons-dashicons/button';
+	import formDropdown from '@iconify/icons-mdi/form-dropdown';
+	import textIcon from '@iconify/icons-bx/text';
+	import menuHamburger from '@iconify/icons-charm/menu-hamburger';
+	import checkboxChecked16Regular from '@iconify/icons-fluent/checkbox-checked-16-regular';
+
+	const filterOptions = [
+		{
+			title: 'Type',
+			items: [
+				{ label: 'Buttons', name: 'buttons', icon: buttonIcon },
+				{ label: 'Inputs', name: 'inputs', icon: textIcon },
+				{ label: 'Dropdowns', name: 'dropdowns', icon: formDropdown },
+				{ label: 'Hamburgers', name: 'hamburgers', icon: menuHamburger },
+				{ label: 'Checkboxes', name: 'checkboxes', icon: checkboxChecked16Regular }
+			]
+		},
+		{
+			title: 'Pallette',
+			items: [
+				{ label: 'Dark', name: 'dark', colors: ['#222'] },
+				{ label: 'Light', name: 'light', colors: ['#fff'] },
+				{ label: 'Colorful', name: 'colorful', colors: ['#50c878', 'green', 'blue'] },
+				{ label: 'Pastel', name: 'pastel', colors: ['#ffc5bf', 'lightpink', 'brown'] }
+			]
+		}
 	];
 </script>
 
-<Section margin modifiers={['u-padding-top-5']}>
-	<div class="u-center-text">
+<Section margin modifiers={['padding-bottom']}>
+	<div class="typ-heading-container">
 		<span class="typ-heading-tertiary u-color-secondary u-weight-900 large">Fully Responsive Components</span>
 		<h2 class="typ-heading-primary bold">All Components</h2>
-		<p class="typ-subtext">
+		<p class="typ-subtext w-800">
 			Browse a variety of components that have been uploaded to CSSLab by fellow developers! Search, sort, and filter the components to help
 			find what you're looking for.
 		</p>
 	</div>
-	<div class="filters">
-		<!-- <Radio {options} /> -->
-	</div>
-	<div class="component-list" />
+	<FilterSplit options={filterOptions}>
+		<div class="filters">
+			<FilterSearch placeholder="Search for a component..." />
+		</div>
+		<div class="component-list">
+			<FrameCard
+				title="GlowingButton"
+				description="A sleek button with an infinite glowing animation"
+				creator="Kubs Korkmaz"
+				href="/"
+				tags={[
+					{
+						name: 'Button'
+					},
+					{
+						name: 'Colorful'
+					},
+					{
+						name: 'Animated'
+					}
+				]}
+			>
+				<button>hi</button>
+			</FrameCard>
+		</div>
+	</FilterSplit>
 </Section>
 
 <style lang="scss">
+	.filters {
+		// padding: 3rem 0 !important;
+	}
+	.component-list {
+		min-height: 2000px;
+		margin-top: $gutter;
+	}
 </style>

@@ -31,6 +31,10 @@
 		position: relative;
 		z-index: 1;
 
+		&.padding-bottom {
+			padding-bottom: 10rem;
+		}
+
 		&.padding-vertical-10 {
 			padding: 10rem 0;
 		}

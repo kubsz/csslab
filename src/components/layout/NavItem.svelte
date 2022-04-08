@@ -18,7 +18,7 @@
 	on:mouseenter|self={!dropdown || (() => (dropdownActive = true))()}
 	on:mouseleave|self={!dropdown || (() => (dropdownActive = false))()}
 >
-	<a class:fill href={link} on:click|preventDefault={() => openModal(modalConfig.component, modalConfig.props)}>
+	<a class:fill href={link} on:click={() => openModal(modalConfig.component, modalConfig.props)}>
 		<span>{label}</span>
 		{#if dropdown}
 			<Icon class="arrow" icon={chevronDown} />
