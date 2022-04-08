@@ -13,54 +13,42 @@
 	import { validateEmail } from '../../lib/utils';
 
 	export let isOpen;
-
 	export let formData = {
 		username: {
 			value: '',
 			label: 'Username',
 			placeholder: 'Enter username...',
 			icon: userIcon,
-			validation: {
-				min: 3,
-				max: 16
-			}
+			validation: { min: 3, max: 16 }
 		},
 		email: {
 			value: '',
 			label: 'Email',
 			placeholder: 'Enter email address...',
 			icon: emailSolid,
-			validation: {
-				min: 5,
-				max: 128,
-				type: 'email'
-			}
+			validation: { min: 5, max: 128, type: 'email' }
 		},
 		password: {
 			value: '',
 			label: 'Password',
 			placeholder: 'Enter password...',
 			icon: lockAlt,
-			validation: {
-				min: 8,
-				max: 64
-			}
+			validation: { min: 8, max: 64 }
 		},
 		password2: {
 			value: '',
 			label: 'Confirm Password',
 			placeholder: 'Enter password confirmation...',
 			icon: lockAlt,
-			validation: {
-				min: 8,
-				max: 64
-			}
+			validation: { min: 8, max: 64 }
 		}
 	};
 
-	const handleBlur = () => {
+	const handleBlur = (blurredKey) => {
 		for (const key of Object.keys(formData)) {
 			const { validation, value, label } = formData[key];
+
+			if (blurredKey !== key && !value) continue;
 
 			const rules = [
 				{
@@ -110,7 +98,7 @@
 						bindValue={formData[formKey].value}
 						type={formData[formKey].validation.type}
 						on:update={({ detail: { value } }) => (formData[formKey].value = value)}
-						on:blur={handleBlur}
+						on:blur={() => handleBlur(formKey)}
 						error={formData[formKey].error}
 						errorMessage={formData[formKey].errorMessage}
 					/>
@@ -125,7 +113,7 @@
 
 <style lang="scss">
 	.form {
-		padding: $gutter $gutter $gutter $gutter;
+		padding: $gutter;
 		display: flex;
 		flex-flow: row wrap;
 		gap: $gutter * 1.5;

@@ -1,4 +1,6 @@
 <script>
+	import { closeModal } from 'svelte-modals';
+
 	import { scale, fade } from 'svelte/transition';
 
 	import Icon from '@iconify/svelte';
@@ -6,7 +8,7 @@
 </script>
 
 <div class="background" transition:fade>
-	<div class="modal" transition:scale>
+	<div class="modal" transition:scale on:click={closeModal}>
 		<button class="close-button">
 			<Icon icon={closeOutline} />
 		</button>

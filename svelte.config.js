@@ -1,11 +1,11 @@
 import autoPreprocess from 'svelte-preprocess';
 import svg from '@poppanator/sveltekit-svg';
-import vercel from '@sveltejs/adapter-vercel';
+import vercel from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: vercel(),
+		adapter: vercel({ trailingSlash: 'never' }),
 		vite: {
 			plugins: [svg()],
 			optimizeDeps: {

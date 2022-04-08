@@ -34,7 +34,6 @@
 		&.padding-vertical-10 {
 			padding: 10rem 0;
 		}
-
 		&.dark {
 			background-color: $col-dark-1;
 		}
