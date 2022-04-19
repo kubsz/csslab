@@ -24,6 +24,13 @@
 		&-sticky {
 			position: sticky;
 			top: $nav-height + $gutter * 2.5;
+
+			&-remove-992 {
+				@include respond(992) {
+					position: unset;
+					top: unset;
+				}
+			}
 		}
 		@for $i from 1 through 20 {
 			&-#{$i} {

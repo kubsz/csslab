@@ -22,7 +22,7 @@
 </script>
 
 <div class="row double-gutter">
-	<div class="filters col-4 col-20-992 col-sticky">
+	<div class="filters col-4 col-20-992 col-sticky col-sticky-remove-992">
 		<ul class="filter-category-list">
 			{#each options as category}
 				<div class="filter-category">

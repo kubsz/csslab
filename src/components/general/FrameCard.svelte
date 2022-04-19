@@ -33,6 +33,10 @@
 		display: flex;
 		align-items: stretch;
 
+		.frame {
+			flex: 0 0 50%;
+		}
+
 		.info {
 			padding: 1.5rem;
 		}

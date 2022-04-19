@@ -3,6 +3,7 @@
 	import FilterSplit from '../../components/general/FilterSplit.svelte';
 	import FilterSearch from '../../components/general/FilterSearch.svelte';
 	import FrameCard from '../../components/general/FrameCard.svelte';
+	import Select from '../../components/general/Select/index.svelte';
 
 	import buttonIcon from '@iconify/icons-dashicons/button';
 	import formDropdown from '@iconify/icons-mdi/form-dropdown';
@@ -31,6 +32,21 @@
 			]
 		}
 	];
+
+	const sortOptions = [
+		{
+			label: 'Most Popular',
+			value: 'most_popular'
+		},
+		{
+			label: 'Recently Added',
+			value: 'recently_added'
+		},
+		{
+			label: 'Alphabetical',
+			value: 'alphabetical'
+		}
+	];
 </script>
 
 <Section margin modifiers={['padding-bottom']}>
@@ -45,6 +61,14 @@
 	<FilterSplit options={filterOptions}>
 		<div class="filters">
 			<FilterSearch placeholder="Search for a component..." />
+		</div>
+		<div class="results-head">
+			<span class="count">12 Results</span>
+			<div class="sort-container">
+				<Select options={sortOptions} orders />
+				<Select options={sortOptions} orders searchable />
+				<Select options={sortOptions} orders searchable multiple />
+			</div>
 		</div>
 		<div class="component-list">
 			<FrameCard
@@ -73,6 +97,13 @@
 <style lang="scss">
 	.filters {
 		// padding: 3rem 0 !important;
+	}
+
+	.results-head {
+		padding: $gutter;
+		display: flex;
+		gap: $gutter;
+		justify-content: space-between;
 	}
 	.component-list {
 		min-height: 2000px;

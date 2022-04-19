@@ -22,6 +22,7 @@
 <Modals>
 	<div transition:fade={{ duration: 400 }} slot="backdrop" class="backdrop" on:click={closeModal} />
 </Modals>
+<div class="overlay" />
 <div class="root" style="--nav-height: {navHeight}px">
 	<Nav on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
 	<div class="content">
@@ -37,6 +38,14 @@
 		&.dark {
 			background-color: $col-dark-1;
 		}
+	}
+
+	.overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		position: relative;
+		z-index: 9999;
 	}
 
 	.content {
