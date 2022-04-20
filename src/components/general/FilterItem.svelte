@@ -1,7 +1,7 @@
 <script>
 	import { scale } from 'svelte/transition';
 	import Icon from '@iconify/svelte';
-	import tickIcon from '@iconify/icons-charm/tick';
+	import tickIcon from '@iconify/icons-charm/tick.js';
 
 	export let active = false;
 	export let label;
