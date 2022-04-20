@@ -1,8 +1,8 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import Icon from '@iconify/svelte';
-	import searchIcon from '@iconify/icons-bytesize/search';
-	import closeOutline from '@iconify/icons-eva/close-outline';
+	import searchIcon from '@iconify/icons-bytesize/search.js';
+	import closeOutline from '@iconify/icons-eva/close-outline.js';
 
 	export let placeholder;
 	export let defaultValue;

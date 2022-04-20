@@ -5,11 +5,11 @@
 	import FrameCard from '../../components/general/FrameCard.svelte';
 	import Select from '../../components/general/Select/index.svelte';
 
-	import buttonIcon from '@iconify/icons-dashicons/button';
-	import formDropdown from '@iconify/icons-mdi/form-dropdown';
-	import textIcon from '@iconify/icons-bx/text';
-	import menuHamburger from '@iconify/icons-charm/menu-hamburger';
-	import checkboxChecked16Regular from '@iconify/icons-fluent/checkbox-checked-16-regular';
+	import buttonIcon from '@iconify/icons-dashicons/button.js';
+	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
+	import textIcon from '@iconify/icons-bx/text.js';
+	import menuHamburger from '@iconify/icons-charm/menu-hamburger.js';
+	import checkboxChecked16Regular from '@iconify/icons-fluent/checkbox-checked-16-regular.js';
 
 	const filterOptions = [
 		{
