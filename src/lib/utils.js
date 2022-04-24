@@ -6,6 +6,7 @@ export const validateEmail = (email) =>
 export const objToCss = (obj, variables = false, suffix = '') => {
 	let str = '';
 	for (const [key, value] of Object.entries(obj)) {
-		str += `${variables ? '--' : ''}${key}: ${value}${suffix}`;
+		str += `${variables ? '--' : ''}${key}: ${value}${suffix};`;
 	}
+	return str;
 };

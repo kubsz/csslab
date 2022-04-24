@@ -65,9 +65,9 @@
 		<div class="results-head">
 			<span class="count">12 Results</span>
 			<div class="sort-container">
-				<Select options={sortOptions} orders />
+				<!-- <Select options={sortOptions} orders /> -->
 				<Select options={sortOptions} orders searchable />
-				<Select options={sortOptions} orders searchable multiple />
+				<!--<Select options={sortOptions} orders searchable multiple /> -->
 			</div>
 		</div>
 		<div class="component-list">

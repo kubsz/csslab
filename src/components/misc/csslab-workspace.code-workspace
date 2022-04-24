@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\.."
+		},
+		{
+			"name": "csslab-strapi",
+			"path": "..\\..\\..\\..\\csslab-strapi"
+		}
+	],
+	"settings": {}
+}
