@@ -39,6 +39,18 @@
 
 		.info {
 			padding: 1.5rem;
+			display: flex;
+			flex-direction: column;
+
+			.title {
+				font-size: 1.8rem;
+				font-weight: 600;
+			}
+
+			.description {
+				font-size: 1.4rem;
+				color: $col-dark-4;
+			}
 		}
 	}
 </style>

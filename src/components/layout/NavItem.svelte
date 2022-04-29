@@ -1,6 +1,5 @@
 <script>
 	import { openModal, closeModal } from 'svelte-modals';
-	import LoginModal from '../modals/LoginModal.svelte';
 
 	import Icon from '@iconify/svelte';
 	import chevronDown from '@iconify/icons-charm/chevron-down.js';
@@ -12,13 +11,20 @@
 	export let modalConfig;
 
 	let dropdownActive = false;
+
+	const handleClick = (e) => {
+		if (!modalConfig) return;
+
+		e.preventDefault();
+		openModal(modalConfig.component, modalConfig.props);
+	};
 </script>
 
 <li
 	on:mouseenter|self={!dropdown || (() => (dropdownActive = true))()}
 	on:mouseleave|self={!dropdown || (() => (dropdownActive = false))()}
 >
-	<a class:fill href={link} on:click|preventDefault={() => openModal(modalConfig.component, modalConfig.props)}>
+	<a class:fill href={link} on:click={handleClick}>
 		<span>{label}</span>
 		{#if dropdown}
 			<Icon class="arrow" icon={chevronDown} />
