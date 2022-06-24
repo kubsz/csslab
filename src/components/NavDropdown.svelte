@@ -139,7 +139,7 @@
 
 								text-transform: uppercase;
 								letter-spacing: 1px;
-								font-size: 0.8rem;
+								font-size: 0.6rem;
 								font-weight: 600;
 								transform: translateY(-0.3rem);
 							}

@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -10,6 +11,7 @@
 
 	import LoginModal from '../modals/LoginModal.svelte';
 	import SignUpModal from '../modals/SignUpModal.svelte';
+	import Hamburger from '../general/Hamburger.svelte';
 
 	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
 	import hamburgerIcon from '@iconify/icons-mdi/hamburger.js';
@@ -27,6 +29,10 @@
 
 	export let colors = null;
 	export let dark = false;
+
+	let mobileNavActive = false;
+
+	let windowWidth;
 
 	let scrollY = 0;
 
@@ -163,24 +169,41 @@
 	onMount(getNavHeight);
 </script>
 
-<svelte:window on:resize={getNavHeight} bind:scrollY on:scroll={getNavHeight} />
+<svelte:window on:resize={getNavHeight} bind:scrollY on:scroll={getNavHeight} bind:innerWidth={windowWidth} />
 <nav bind:this={navRef} class:shadow={false}>
 	<a href="/" class="logo">
 		<Logo />
 	</a>
-	<ul>
-		{#each options.filter((opt) => !opt.right) as option}
-			<NavItem {...option} />
-		{/each}
-	</ul>
-	<ul>
-		{#each options.filter((opt) => opt.right) as option}
-			<NavItem label={option.label} link={option.link} fill={option.fill} modalConfig={option.modalConfig} />
-		{/each}
-	</ul>
+	{#if windowWidth > 992}
+		<ul>
+			{#each options.filter((opt) => !opt.right) as option}
+				<NavItem {...option} />
+			{/each}
+		</ul>
+		<ul>
+			{#each options.filter((opt) => opt.right) as option}
+				<NavItem label={option.label} link={option.link} fill={option.fill} modalConfig={option.modalConfig} />
+			{/each}
+		</ul>
+	{:else}
+		<div class="hamburger-container">
+			<Hamburger thickness=".2rem" width="3.2rem" bind:active={mobileNavActive} />
+		</div>
+		{#if mobileNavActive}
+			<div class="nav-dropdown" transition:fly={{ y: -500 }}>yeet</div>
+		{/if}
+	{/if}
 </nav>
 
 <style lang="scss">
+	:global(.nav-dropdown) {
+		position: absolute;
+		background-color: red;
+		left: 0;
+		height: 500px;
+		width: 100%;
+		top: 10rem;
+	}
 	nav {
 		position: fixed;
 		width: 100%;
@@ -209,6 +232,13 @@
 			display: flex;
 			align-items: center;
 			gap: $gutter * 2;
+		}
+		.hamburger-container {
+			padding: 0 1.5rem;
+			align-self: stretch;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 		}
 	}
 </style>

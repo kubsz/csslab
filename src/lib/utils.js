@@ -10,3 +10,5 @@ export const objToCss = (obj, variables = false, suffix = '') => {
 	}
 	return str;
 };
+
+export const pluralify = (num, prefix = '') => (num === 1 ? '' : prefix + 's');

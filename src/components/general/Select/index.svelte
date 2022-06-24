@@ -1,12 +1,17 @@
 <script>
-	import SelectDropdownItem from './SelectDropdownItem.svelte';
-	import { clickOutside } from './../../../directives/clickOutside.js';
 	import { fly } from 'svelte/transition';
-	import { inject } from '../../../directives/inject';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	import { objToCss } from '../../../lib/utils';
+	import { clickOutside } from './../../../directives/clickOutside.js';
+	import { inject } from '../../../directives/inject';
 
+	import SelectDropdownItem from './SelectDropdownItem.svelte';
 	import SelectValue from './SelectValue.svelte';
+
+	import Icon from '@iconify/svelte';
+	import chevronDown from '@iconify/icons-charm/chevron-down.js';
 
 	export let options;
 
@@ -29,10 +34,10 @@
 	let mainRef;
 	let searchRef;
 
-	let ascending = orderToggle ? orderDefault : null;
+	let ascending = orderDefault;
 	let searchInput = '';
 
-	let singleValue = defaultValue || null;
+	let singleValue = defaultValue || (orderToggle ? options[0].value : null);
 	let multipleValue = defaultValue || [];
 
 	const getFilteredOptions = () => {
@@ -56,7 +61,7 @@
 		dropdownActive = force !== null ? force : !dropdownActive;
 		searchInput = '';
 
-		if (!dropdownActive) {
+		if (!dropdownActive && !orderToggle) {
 			searchRef.blur();
 			return;
 		}
@@ -71,7 +76,10 @@
 			return;
 		}
 
-		singleValue = value === singleValue ? null : value;
+		if (orderToggle) {
+			ascending = value === singleValue ? !ascending : orderDefault;
+		}
+		singleValue = value === singleValue ? (orderToggle ? singleValue : null) : value;
 		handleButtonClick(false);
 	};
 
@@ -92,9 +100,12 @@
 		return obj?.label || null;
 	};
 
+	const checkValue = (val) => (multiple ? value.indexOf(val) > -1 : value === val);
+
 	$: if (searchRef) searchRef.focus();
 
 	$: value = multiple ? (multipleValue.length ? multipleValue : null) : singleValue;
+	$: dispatch('update', { value, ascending });
 	$: valueLabel = getLabelFromValue(value);
 
 	$: filteredOptions = getFilteredOptions(searchInput);
@@ -103,15 +114,16 @@
 
 <svelte:window on:resize={updateDropdownPosition} on:scroll={updateDropdownPosition} />
 <div class="select-container disable_clickoutside">
-	<button class="main" on:click={() => handleButtonClick(true)} bind:this={mainRef}>
+	<button class="main" class:active={dropdownActive} on:click={() => handleButtonClick(true)} bind:this={mainRef}>
 		{#if searchable && dropdownActive}
 			<input type="text" {placeholder} bind:value={searchInput} bind:this={searchRef} />
 		{/if}
 		<SelectValue label={valueLabel} {multiple} />
+		<Icon icon={chevronDown} />
 	</button>
 	{#if dropdownActive}
 		<div
-			class="select-dropdown"
+			class="select-dropdown disable_clickoutside"
 			style={dropdownStyles}
 			use:inject={{ selector: '.overlay', style: dropdownStyles }}
 			transition:fly={{ y: 20 }}
@@ -120,7 +132,13 @@
 		>
 			<ul class="list">
 				{#each filteredOptions as option}
-					<SelectDropdownItem {...option} on:click={() => handleValueSelect(option.value)} />
+					<SelectDropdownItem
+						{orderToggle}
+						{ascending}
+						active={checkValue(option.value)}
+						{...option}
+						on:click={() => handleValueSelect(option.value)}
+					/>
 				{/each}
 				{#if !filteredOptions.length}
 					<li>
@@ -148,9 +166,14 @@
 			padding: 1.2rem 1rem 1rem 1rem;
 			text-align: left;
 
+			display: flex;
+			align-items: center;
+
 			height: 4.5rem;
 
 			position: relative;
+
+			cursor: pointer;
 			input {
 				position: absolute;
 				top: 0;
@@ -159,6 +182,17 @@
 				width: 100%;
 				padding: 1.1rem 1rem 1rem 1rem;
 				font-size: 1.3rem;
+
+				cursor: pointer;
+			}
+
+			:global(svg) {
+				color: $col-dark-6;
+				margin-left: auto;
+				transition: 0.15s ease;
+			}
+			&.active :global(svg) {
+				transform: rotateX(180deg);
 			}
 		}
 	}
@@ -167,6 +201,7 @@
 		background-color: $col-light-1;
 		border-radius: $radius;
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+		overflow: hidden;
 
 		ul {
 			li {

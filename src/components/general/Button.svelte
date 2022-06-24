@@ -25,9 +25,11 @@
 		background-color: $col-dark-2;
 		color: $col-light-3;
 		padding: 1em 1.5em;
-		font-size: 1.4rem;
+		font-size: 1.3rem;
 		font-weight: 500;
 		border-radius: $radius;
+
+		display: inline-block;
 
 		cursor: pointer;
 		transition: all 0.15s ease;
@@ -54,6 +56,13 @@
 				background-color: lighten($col-secondary, 5%);
 				color: $col-light-1;
 			}
+		}
+
+		&.uppercase {
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-size: 1.2rem;
+			font-weight: 700;
 		}
 
 		&.block {

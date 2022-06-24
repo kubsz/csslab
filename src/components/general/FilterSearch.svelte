@@ -1,4 +1,7 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	import { fly } from 'svelte/transition';
 	import Icon from '@iconify/svelte';
 	import searchIcon from '@iconify/icons-bytesize/search.js';
@@ -8,6 +11,8 @@
 	export let defaultValue;
 
 	let value = '';
+
+	$: dispatch('update', value);
 </script>
 
 <div class="input-container">
@@ -34,7 +39,6 @@
 		width: 100%;
 
 		& > :global(svg) {
-			padding: 0 0.2rem 0 0.5rem;
 			color: rgba(0, 0, 0, 0.3);
 		}
 

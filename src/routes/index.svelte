@@ -61,8 +61,8 @@
 			your applications. Have a glance at all of our custom components, and copy them directly into your projects for FREE.
 		</p>
 		<div class="btn-container">
-			<Button modifiers={['large', 'primary', 'initanim', 'initanim-s-600', 'initanim-d-500']}>Browse Components</Button>
-			<Button modifiers={['large', 'initanim', 'initanim-s-600', 'initanim-d-600']}>Become a Contributor</Button>
+			<Button modifiers={['large', 'primary', 'hover-scale', 'initanim', 'initanim-s-600', 'initanim-d-500']}>Browse Components</Button>
+			<Button modifiers={['large', 'hover-scale', 'initanim', 'initanim-s-600', 'initanim-d-600']}>Become a Contributor</Button>
 		</div>
 	</div>
 </Section>

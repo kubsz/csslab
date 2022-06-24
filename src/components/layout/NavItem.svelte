@@ -13,10 +13,10 @@
 	let dropdownActive = false;
 
 	const handleClick = (e) => {
-		if (!modalConfig) return;
-
-		e.preventDefault();
-		openModal(modalConfig.component, modalConfig.props);
+		if (modalConfig) {
+			e.preventDefault();
+			openModal(modalConfig.component, modalConfig.props);
+		}
 	};
 </script>
 

@@ -1,24 +1,23 @@
 <script>
+	import { onMount } from 'svelte';
+
 	import FilterItem from './FilterItem.svelte';
 
 	import Icon from '@iconify/svelte';
 
-	import { onMount } from 'svelte';
-	import Button from './Button.svelte';
-	import ButtonInput from './ButtonInput.svelte';
-
 	export let options;
 
-	let filters = options.flatMap((category) => category.items.map((item) => ({ name: item.name, value: false })));
+	const getDefaultFilters = () => options.flatMap((category) => category.items.map((item) => ({ name: item.name, value: false })));
+
+	let filters = getDefaultFilters();
 
 	const resetFilters = () => {
-		filters = options.flatMap((category) => category.items.map((item) => ({ name: item.name, value: false })));
+		filters = getDefaultFilters();
 	};
 
 	onMount(() => {
 		resetFilters();
 	});
-	$: console.log(filters);
 </script>
 
 <div class="row double-gutter">

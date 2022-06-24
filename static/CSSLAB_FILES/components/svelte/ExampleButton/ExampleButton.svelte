@@ -2,7 +2,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 
-	export let color = 'blue';
+	export let color = 'crimson';
 </script>
 
 <button class="button" style="background-color:{color}">
