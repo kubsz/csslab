@@ -1,9 +1,11 @@
 <script context="module">
-	export async function load(pg) {
+	export async function load({ url, session }) {
 		const darkPathnames = ['/'];
+
 		return {
 			props: {
-				dark: darkPathnames.indexOf(pg.url.pathname) > -1
+				dark: darkPathnames.indexOf(url.pathname) > -1,
+				user: session.user
 			}
 		};
 	}
@@ -16,6 +18,8 @@
 	import Nav from '../components/layout/Nav.svelte';
 
 	export let dark = false;
+	export let user = null;
+
 	let navHeight = 94;
 </script>
 
@@ -24,7 +28,7 @@
 </Modals>
 <div class="overlay" />
 <div class="root" style="--nav-height: {navHeight}px">
-	<Nav on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
+	<Nav {user} on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
 	<div class="content">
 		<slot />
 	</div>

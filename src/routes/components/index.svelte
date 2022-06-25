@@ -34,8 +34,10 @@
 	import buttonIcon from '@iconify/icons-dashicons/button.js';
 	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
 	import textIcon from '@iconify/icons-bx/text.js';
-	import menuHamburger from '@iconify/icons-charm/menu-hamburger.js';
 	import checkboxChecked16Regular from '@iconify/icons-fluent/checkbox-checked-16-regular.js';
+
+	import menuHamburger from '@iconify/icons-charm/menu-hamburger.js';
+	import grid3x3GapFill from '@iconify/icons-bi/grid-3x3-gap-fill.js';
 
 	import { pluralify } from '$lib/utils';
 
@@ -77,7 +79,7 @@
 
 	const viewOptions = [
 		{ icon: menuHamburger, value: 'BOARD', label: 'Board' },
-		{ icon: menuHamburger, value: 'CARD', label: 'Card' }
+		{ icon: grid3x3GapFill, value: 'CARD', label: 'Card' }
 	];
 
 	const filter = (_) => {
@@ -93,9 +95,11 @@
 
 <Section margin modifiers={['padding-bottom']}>
 	<div class="typ-heading-container">
-		<span class="typ-heading-tertiary u-color-secondary u-weight-900 large">Fully Responsive Components</span>
-		<h2 class="typ-heading-primary bold">All Components</h2>
-		<p class="typ-subtext w-800">
+		<span class="typ-heading-tertiary u-color-secondary u-weight-900 large initanim initanim-s-600 initanim-d-300"
+			>Fully Responsive Components</span
+		>
+		<h2 class="typ-heading-primary bold initanim initanim-s-600 initanim-d-400">All Components</h2>
+		<p class="typ-subtext w-800 initanim initanim-s-600 initanim-d-500">
 			Browse a variety of components that have been uploaded to CSSLab by fellow developers! Search, sort, and filter the components to help
 			find what you're looking for.
 		</p>

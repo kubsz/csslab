@@ -10,8 +10,6 @@
 		if (!texture) return;
 		mousePosition = { left: e.clientX, top: e.clientY };
 	};
-
-	console.log(padding);
 </script>
 
 <svelte:window on:mousemove={handleMouseMove} />
@@ -76,7 +74,7 @@
 			opacity: 1;
 		}
 		.texture-opening {
-			background-image: radial-gradient(rgba($col-dark-1, 0.5), $col-dark-1 20vw);
+			background-image: radial-gradient(rgba($col-dark-1, 1), $col-dark-1 20vw);
 			background-position: center;
 			width: 200vw;
 			height: 200vw;

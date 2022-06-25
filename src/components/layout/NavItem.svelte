@@ -41,7 +41,7 @@
 	li {
 		position: relative;
 		a {
-			color: $col-light-4;
+			color: $col-light-3;
 			font-size: 1.5rem;
 			font-weight: 600;
 

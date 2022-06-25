@@ -15,7 +15,12 @@
 {#if href}
 	<a {href} class={classes}> <slot /></a>
 {:else}
-	<button class={classes} in:animate={{ x: 220, cond: showcaseTransition, delay: 150 }} out:animate={{ x: -220, cond: showcaseTransition }}>
+	<button
+		on:click
+		class={classes}
+		in:animate={{ x: 220, cond: showcaseTransition, delay: 150 }}
+		out:animate={{ x: -220, cond: showcaseTransition }}
+	>
 		<slot /></button
 	>
 {/if}

@@ -4,8 +4,8 @@
 	import { strapiImage } from '$lib/strapi';
 
 	import Button from './Button.svelte';
-	import ExampleButton from '../../../static/CSSLAB_FILES/components/svelte/ExampleButton/ExampleButton.svelte';
-	import SupportedTechnologyShowcase from '../misc/SupportedTechnologyShowcase.svelte';
+	// import ExampleButton from '../../CSSLAB_FILES/components/svelte/ExampleButton/ExampleButton.svelte';
+	// import SupportedTechnologyShowcase from '../misc/SupportedTechnologyShowcase.svelte';
 
 	export let title;
 	export let description;
@@ -34,9 +34,10 @@
 			{/each}
 		</ul>
 		{#if Component}
-			<svelte:component this={Component} />
+			<!-- <svelte:component this={Component} /> -->
+		{:else}
+			<!-- <ExampleButton>Click Me!</ExampleButton> -->
 		{/if}
-		<ExampleButton>Click Me!</ExampleButton>
 	</div>
 	<div class="info">
 		<ul class="tag-list">

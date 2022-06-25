@@ -1,5 +1,8 @@
 <script>
 	import { scale } from 'svelte/transition';
+
+	import axios from 'axios';
+
 	import handWave from '@iconify/icons-mdi/hand-wave.js';
 	import emailSolid from '@iconify/icons-clarity/email-solid.js';
 	import lockAlt from '@iconify/icons-bxs/lock-alt.js';
@@ -44,11 +47,11 @@
 		}
 	};
 
+	let error = null;
+
 	const handleBlur = (blurredKey) => {
 		for (const key of Object.keys(formData)) {
 			const { validation, value, label } = formData[key];
-
-			if (blurredKey !== key && !value) continue;
 
 			const rules = [
 				{
@@ -69,6 +72,8 @@
 				}
 			];
 
+			if (blurredKey !== key && !value) continue;
+
 			const brokenRule = rules.find((x) => x.conditions.indexOf(true) > -1);
 
 			if (!brokenRule) {
@@ -77,6 +82,27 @@
 			}
 
 			formData[key] = { ...formData[key], error: true, errorMessage: brokenRule.message };
+		}
+	};
+
+	const handleSubmit = async () => {
+		const endpoint = '/api/auth/register';
+
+		const {
+			username: { value: username },
+			email: { value: email },
+			password: { value: password }
+		} = formData;
+
+		try {
+			const response = await axios.post(endpoint, { username, email, password });
+
+			if (response.status !== 200) throw Error('error registering');
+
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+			error = err.message;
 		}
 	};
 </script>
@@ -88,7 +114,7 @@
 			title="Join CSSLab!"
 			subtext="Sign up below to become a part of CSSLab today! Enter some brief credentials and we'll get you started"
 		/>
-		<form class="form">
+		<form class="form" on:submit|preventDefault={handleSubmit}>
 			{#each Object.keys(formData) as formKey}
 				<div class="form-section f-100">
 					<IconInput

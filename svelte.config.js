@@ -10,6 +10,11 @@ const config = {
 			plugins: [svg()],
 			optimizeDeps: {
 				include: ['highlight.js/lib/core']
+			},
+			server: {
+				fs: {
+					allow: ['locales']
+				}
 			}
 		}
 	},

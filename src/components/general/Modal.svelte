@@ -8,8 +8,8 @@
 </script>
 
 <div class="background" transition:fade>
-	<div class="modal" transition:scale on:click={closeModal}>
-		<button class="close-button">
+	<div class="modal" transition:scale>
+		<button class="close-button" on:click={closeModal}>
 			<Icon icon={closeOutline} />
 		</button>
 		<slot />

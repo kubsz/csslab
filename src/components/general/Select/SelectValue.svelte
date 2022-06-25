@@ -1,8 +1,6 @@
 <script>
 	export let multiple;
 	export let label;
-
-	console.log(label);
 </script>
 
 <div class="value">

@@ -1,5 +1,8 @@
 <script>
 	import { scale } from 'svelte/transition';
+
+	import axios from 'axios';
+
 	import handWave from '@iconify/icons-mdi/hand-wave.js';
 	import lockAlt from '@iconify/icons-bxs/lock-alt.js';
 	import userIcon from '@iconify/icons-bxs/user.js';
@@ -10,6 +13,9 @@
 	import Button from '../general/Button.svelte';
 
 	export let isOpen;
+
+	let error = null;
+
 	const formData = {
 		username: {
 			value: '',
@@ -54,6 +60,25 @@
 			formData[key] = { ...formData[key], error: true, errorMessage: brokenRule.message };
 		}
 	};
+
+	const handleSubmit = async () => {
+		const endpoint = '/api/auth/login';
+
+		const {
+			username: { value: identifier },
+			password: { value: password }
+		} = formData;
+
+		try {
+			const response = await axios.post(endpoint, { identifier, password });
+
+			if (response.status !== 200) throw Error('error logging in');
+			document.location.reload();
+		} catch (err) {
+			console.log(err);
+			error = err.message;
+		}
+	};
 </script>
 
 {#if isOpen}
@@ -63,7 +88,7 @@
 			title="Welcome Back!"
 			subtext="Great to see you again! Enter your credentials to continue to have full access to CSSLab"
 		/>
-		<form class="form">
+		<form class="form" on:submit|preventDefault={handleSubmit}>
 			{#each Object.keys(formData) as formKey}
 				<div class="form-section f-100">
 					<IconInput

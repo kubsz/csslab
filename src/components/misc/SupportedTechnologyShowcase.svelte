@@ -7,10 +7,10 @@
 
 	import CodeEditor from '../general/CodeEditor.svelte';
 
-	import ExampleButtonShowcase from '../../../static/CSSLAB_FILES/components/svelte/ExampleButton/index.svelte';
-	import HamburgerShowcase from '../../../static/CSSLAB_FILES/components/svelte/Hamburger/index.svelte';
-	import IconInputShowcase from '../../../static/CSSLAB_FILES/components/svelte/IconInput/index.svelte';
-	import SelectDropdownShowcase from '../../../static/CSSLAB_FILES/components/svelte/SelectDropdown/index.svelte';
+	import ExampleButtonShowcase from '../../CSSLAB_FILES/components/svelte/ExampleButton/index.svelte';
+	import HamburgerShowcase from '../../CSSLAB_FILES/components/svelte/Hamburger/index.svelte';
+	import IconInputShowcase from '../../CSSLAB_FILES/components/svelte/IconInput/index.svelte';
+	import SelectDropdownShowcase from '../../CSSLAB_FILES/components/svelte/SelectDropdown/index.svelte';
 
 	export let technologies = [];
 

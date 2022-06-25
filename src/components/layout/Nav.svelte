@@ -1,11 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
+	import { inject } from '../../directives/inject';
+
 	import NavItem from './NavItem.svelte';
+	import NavMobileMenu from './NavMobileMenu.svelte';
 
 	import Logo from '../../assets/logo-light.svg';
 
@@ -24,16 +27,18 @@
 	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
 	import svelteIcon from '@iconify/icons-cib/svelte.js';
 	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
+	import Button from '../general/Button.svelte';
+	import axios from 'axios';
 
 	let navRef;
 
+	export let user;
 	export let colors = null;
 	export let dark = false;
 
 	let mobileNavActive = false;
 
-	let windowWidth;
-
+	let windowWidth = 1920;
 	let scrollY = 0;
 
 	const options = [
@@ -164,6 +169,12 @@
 		}
 	];
 
+	const handleLogout = async () => {
+		const response = await axios.get('/api/auth/logout');
+
+		document.location.reload();
+	};
+
 	const getNavHeight = () => dispatch('getNavHeight', { value: Math.ceil(navRef.getBoundingClientRect().height) });
 
 	onMount(getNavHeight);
@@ -180,29 +191,43 @@
 				<NavItem {...option} />
 			{/each}
 		</ul>
-		<ul>
-			{#each options.filter((opt) => opt.right) as option}
-				<NavItem label={option.label} link={option.link} fill={option.fill} modalConfig={option.modalConfig} />
-			{/each}
-		</ul>
+		{#if user}
+			<div>
+				<h5 style="color:white">{user.email}</h5>
+				<Button on:click={handleLogout}>Logout</Button>
+			</div>
+		{:else}
+			<ul>
+				{#each options.filter((opt) => opt.right) as option}
+					<NavItem label={option.label} link={option.link} fill={option.fill} modalConfig={option.modalConfig} />
+				{/each}
+			</ul>
+		{/if}
 	{:else}
 		<div class="hamburger-container">
 			<Hamburger thickness=".2rem" width="3.2rem" bind:active={mobileNavActive} />
 		</div>
-		{#if mobileNavActive}
-			<div class="nav-dropdown" transition:fly={{ y: -500 }}>yeet</div>
-		{/if}
 	{/if}
 </nav>
+{#if mobileNavActive}
+	<div class="nav-dropdown" style="--nav-height:{navRef.offsetHeight}px" transition:slide|local use:inject={'.overlay'}>
+		<NavMobileMenu />
+	</div>
+{/if}
 
 <style lang="scss">
-	:global(.nav-dropdown) {
+	:global(div.nav-dropdown) {
 		position: absolute;
-		background-color: red;
+		background-color: $col-dark-1;
 		left: 0;
-		height: 500px;
+		top: var(--nav-height);
+		z-index: 5;
+
+		height: calc(100vh - var(--nav-height));
 		width: 100%;
-		top: 10rem;
+
+		display: flex;
+		flex-direction: column;
 	}
 	nav {
 		position: fixed;

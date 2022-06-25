@@ -1,5 +1,5 @@
 <script>
-	import ExampleButton from '../../../static/CSSLAB_FILES/components/svelte/ExampleButton/ExampleButton.svelte';
+	import ExampleButton from '../../CSSLAB_FILES/components/svelte/ExampleButton/ExampleButton.svelte';
 
 	export let name;
 	export let description;

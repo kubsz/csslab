@@ -9,7 +9,7 @@ export const post = async ({ request }) => {
 	let { path: dirPath, technology } = await request.json();
 	if (!dirPath) return { body: 'unable to find' };
 
-	const dir = path.resolve('static', 'CSSLAB_FILES', ...dirPath.split('/'));
+	const dir = path.resolve('src', 'CSSLAB_FILES', ...dirPath.split('/'));
 
 	let fileNames = [];
 

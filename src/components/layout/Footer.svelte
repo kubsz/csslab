@@ -155,13 +155,14 @@
 
 		.main {
 			display: flex;
+			flex-flow: row wrap;
 			justify-content: space-between;
-			flex-wrap: wrap;
 			gap: $gutter * 2;
 			margin: $gutter * 2 0;
 
 			.footer-links {
 				display: flex;
+				flex-flow: row wrap;
 				gap: $gutter * 2;
 
 				@include respond(1600) {
