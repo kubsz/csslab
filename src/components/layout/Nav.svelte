@@ -170,8 +170,6 @@
 		}
 	];
 
-	$: console.log(user);
-
 	const getNavHeight = () => dispatch('getNavHeight', { value: Math.ceil(navRef.getBoundingClientRect().height) });
 
 	onMount(getNavHeight);

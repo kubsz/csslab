@@ -34,9 +34,9 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 <div class="user-container">
-	<button class="image-button">
+	<a href="/" class="image-button">
 		<img src={strapiImage(user.image, 'thumbnail')} alt="{user.username} profile image" />
-	</button>
+	</a>
 	<button
 		class="username-button disable_clickoutside"
 		class:active={dropdownActive}
@@ -133,7 +133,8 @@
 	}
 
 	:global(.user-dropdown) {
-		background-color: rgba($col-primary, 0.3);
+		background-color: rgb(43, 43, 43);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 		backdrop-filter: blur(24px);
 		border-radius: $radius;
 		width: 18rem;
@@ -142,14 +143,14 @@
 
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.5rem;
 
 		button {
 			padding: 1rem;
 			text-align: left;
-			color: rgba($col-primary, 0.8);
+			color: rgba(255, 255, 255, 0.5);
 			border-radius: $radius;
-			font-size: 1.3rem;
+			font-size: 1.2rem;
 
 			cursor: pointer;
 			transition: 0.1s ease;
@@ -158,14 +159,20 @@
 			align-items: center;
 
 			:global(svg) {
-				font-size: 1.5rem;
+				font-size: 1.4rem;
 				padding-right: 1rem;
-				color: rgba($col-primary, 0.6);
+				color: rgba(255, 255, 255, 0.3);
+				width: 1.6rem;
+				box-shadow: content-box;
 			}
 
 			&:hover {
-				background-color: rgba($col-primary, 0.1);
-				color: $col-primary;
+				background-color: rgba(255, 255, 255, 0.1);
+				color: $col-light-1;
+
+				:global(svg) {
+					color: rgba(255, 255, 255, 0.8);
+				}
 			}
 		}
 	}

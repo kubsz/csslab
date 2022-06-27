@@ -1,4 +1,6 @@
 <script>
+	import { onDestroy } from 'svelte';
+
 	import Icon from '@iconify/svelte';
 	import { fly, scale } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
@@ -8,7 +10,7 @@
 	export let heading;
 </script>
 
-<div class="dropdown" transition:fly|local={{ y: 10, duration: 400, easing: backOut }}>
+<div class="dropdown" in:fly|local={{ y: 10, duration: 400, easing: backOut }}>
 	<h3 in:scale={{ delay: 100, y: 20 }}>{heading}</h3>
 	<ul>
 		{#each dropdown.sections as section, i (section.title)}

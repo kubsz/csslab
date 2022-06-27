@@ -10,19 +10,17 @@
 			.then((res) => res.json())
 			.catch((err) => console.log(err));
 
-		let data = { components, categories, tags };
-
-		for (const [key, value] of Object.entries(data)) {
-			if (!value) data[key] = [];
-		}
+		const removeStrapiAttributes = (arr) => arr.map((item) => ({ id: item.id, ...item.attributes }));
 
 		return {
-			props: { components, categories, tags }
+			props: { components, categories, tags: removeStrapiAttributes(tags.data) }
 		};
 	};
 </script>
 
 <script>
+	import { pick } from 'lodash';
+
 	import Section from '../../components/layout/Section.svelte';
 	import FilterSplit from '../../components/general/FilterSplit.svelte';
 	import FilterSearch from '../../components/general/FilterSearch.svelte';
@@ -42,6 +40,11 @@
 	import { pluralify } from '$lib/utils';
 
 	export let components = [];
+	export let tags = [];
+	export let categories = [];
+	export let technologies = [];
+
+	$: console.log(tags, categories, technologies);
 
 	let filters = {
 		query: '',
@@ -49,27 +52,59 @@
 	};
 	let view = 'CARD';
 
-	const filterOptions = [
-		{
-			title: 'Type',
-			items: [
-				{ label: 'Buttons', name: 'buttons', icon: buttonIcon },
-				{ label: 'Inputs', name: 'inputs', icon: textIcon },
-				{ label: 'Dropdowns', name: 'dropdowns', icon: formDropdown },
-				{ label: 'Hamburgers', name: 'hamburgers', icon: menuHamburger },
-				{ label: 'Checkboxes', name: 'checkboxes', icon: checkboxChecked16Regular }
-			]
-		},
-		{
-			title: 'Pallette',
-			items: [
-				{ label: 'Dark', name: 'dark', colors: ['#222'] },
-				{ label: 'Light', name: 'light', colors: ['#fff'] },
-				{ label: 'Colorful', name: 'colorful', colors: ['#50c878', 'green', 'blue'] },
-				{ label: 'Pastel', name: 'pastel', colors: ['#ffc5bf', 'lightpink', 'brown'] }
-			]
+	const icons = {
+		Categories: {
+			buttons: buttonIcon,
+			inputs: textIcon,
+			dropdowns: formDropdown,
+			hamburgers: menuHamburger,
+			checkboxes: checkboxChecked16Regular
 		}
+	};
+
+	// const filterOptions = [
+	// 	{
+	// 		title: 'Type',
+	// 		items: [
+	// 			{ label: 'Buttons', name: 'buttons', icon: buttonIcon },
+	// 			{ label: 'Inputs', name: 'inputs', icon: textIcon },
+	// 			{ label: 'Dropdowns', name: 'dropdowns', icon: formDropdown },
+	// 			{ label: 'Hamburgers', name: 'hamburgers', icon: menuHamburger },
+	// 			{ label: 'Checkboxes', name: 'checkboxes', icon: checkboxChecked16Regular }
+	// 		]
+	// 	},
+	// 	{
+	// 		title: 'Pallette',
+	// 		items: [
+	// 			{ label: 'Dark', name: 'dark', colors: ['#222'] },
+	// 			{ label: 'Light', name: 'light', colors: ['#fff'] },
+	// 			{ label: 'Colorful', name: 'colorful', colors: ['#50c878', 'green', 'blue'] },
+	// 			{ label: 'Pastel', name: 'pastel', colors: ['#ffc5bf', 'lightpink', 'brown'] }
+	// 		]
+	// 	}
+	// ];
+
+	const getIcon = (key, id) => {
+		return icons[key][id];
+	};
+
+	const filterConfig = [
+		{ items: categories, title: 'Categories', keys: { label: 'name', value: 'slug' } },
+		{ items: tags, title: 'Tags', keys: { label: 'name', value: 'name' } }
 	];
+
+	const filterOptions = filterConfig.map((config) => {
+		return {
+			title: config.title,
+			items: config.items.map((item) => ({
+				label: item[config.keys.label],
+				value: item[config.keys.value],
+				icon: getIcon(config.title, config.keys.value)
+			}))
+		};
+	});
+
+	console.log(filterOptions);
 
 	const sortOptions = [
 		{ label: 'Most Popular', value: 'most_popular' },
