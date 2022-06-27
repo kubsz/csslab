@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte/internal';
+	const dispatch = createEventDispatcher();
 
 	import FilterItem from './FilterItem.svelte';
 
@@ -7,17 +9,14 @@
 
 	export let options;
 
-	const getDefaultFilters = () => options.flatMap((category) => category.items.map((item) => ({ name: item.name, value: false })));
+	const resetFilters = () => Object.values(options).reduce((obj, value) => ({ ...obj, [value.id]: [] }), {});
 
-	let filters = getDefaultFilters();
+	let filters = resetFilters();
 
-	const resetFilters = () => {
-		filters = getDefaultFilters();
+	const handleFilterItemUpdate = (categoryID, filterId, active) => {
+		filters[categoryID] = active ? [...filters[categoryID], filterId] : filters[categoryID].filter((item) => item !== filterId);
+		dispatch('update', { ...filters });
 	};
-
-	onMount(() => {
-		resetFilters();
-	});
 </script>
 
 <div class="row double-gutter">
@@ -28,7 +27,11 @@
 					<h4>{category.title}</h4>
 					<ul class="filter-list">
 						{#each category.items as item}
-							<FilterItem label={item.label}>
+							<FilterItem
+								label={item.label}
+								color={item.color}
+								on:update={(e) => handleFilterItemUpdate(category.id, item.value, e.detail.active)}
+							>
 								<div slot="icon" class="icon">
 									{#if item.icon}
 										<Icon icon={item.icon} />

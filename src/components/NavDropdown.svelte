@@ -141,7 +141,7 @@
 
 								text-transform: uppercase;
 								letter-spacing: 1px;
-								font-size: 0.6rem;
+								font-size: 0.7rem;
 								font-weight: 600;
 								transform: translateY(-0.3rem);
 							}

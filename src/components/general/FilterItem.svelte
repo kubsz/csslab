@@ -1,13 +1,21 @@
 <script>
+	import { createEventDispatcher } from 'svelte/internal';
+	const dispatch = createEventDispatcher();
+
 	import { scale } from 'svelte/transition';
+
 	import Icon from '@iconify/svelte';
+
 	import tickIcon from '@iconify/icons-charm/tick.js';
 
 	export let active = false;
 	export let label;
+	export let color;
+
+	$: dispatch('update', { active });
 </script>
 
-<button class:active on:click={() => (active = !active)}>
+<button class:active on:click={() => (active = !active)} class:color style="--col-bg:{color}3d;--color:{color}">
 	<div class="checkbox">
 		{#if active}
 			<div class="icon" transition:scale={{ duration: 300 }}>
@@ -53,6 +61,15 @@
 			background-color: $col-secondary;
 			border-color: $col-secondary;
 			color: #fff;
+		}
+
+		&.color .checkbox {
+			background-color: var(--col-bg);
+			color: var(--color);
+		}
+
+		&.color.active .checkbox {
+			border-color: var(--color);
 		}
 
 		span {

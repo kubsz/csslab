@@ -28,8 +28,6 @@
 	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
 	import svelteIcon from '@iconify/icons-cib/svelte.js';
 	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
-	import Button from '../general/Button.svelte';
-	import axios from 'axios';
 
 	let navRef;
 
@@ -151,7 +149,6 @@
 		},
 		{
 			label: 'Sign In',
-			link: '/sign-in',
 			right: true,
 			modalConfig: {
 				component: LoginModal,
@@ -160,7 +157,6 @@
 		},
 		{
 			label: 'Sign Up',
-			link: '/sign-up',
 			right: true,
 			fill: true,
 			modalConfig: {

@@ -44,67 +44,55 @@
 	export let categories = [];
 	export let technologies = [];
 
-	$: console.log(tags, categories, technologies);
-
 	let filters = {
 		query: '',
-		sort: { value: 'most_popular', ascending: false }
+		sort: { value: 'most_popular', ascending: false },
+		tags: [],
+		categories: []
 	};
 	let view = 'CARD';
 
 	const icons = {
-		Categories: {
+		categories: {
 			buttons: buttonIcon,
 			inputs: textIcon,
 			dropdowns: formDropdown,
 			hamburgers: menuHamburger,
 			checkboxes: checkboxChecked16Regular
-		}
+		},
+		tags: {}
 	};
 
-	// const filterOptions = [
-	// 	{
-	// 		title: 'Type',
-	// 		items: [
-	// 			{ label: 'Buttons', name: 'buttons', icon: buttonIcon },
-	// 			{ label: 'Inputs', name: 'inputs', icon: textIcon },
-	// 			{ label: 'Dropdowns', name: 'dropdowns', icon: formDropdown },
-	// 			{ label: 'Hamburgers', name: 'hamburgers', icon: menuHamburger },
-	// 			{ label: 'Checkboxes', name: 'checkboxes', icon: checkboxChecked16Regular }
-	// 		]
-	// 	},
-	// 	{
-	// 		title: 'Pallette',
-	// 		items: [
-	// 			{ label: 'Dark', name: 'dark', colors: ['#222'] },
-	// 			{ label: 'Light', name: 'light', colors: ['#fff'] },
-	// 			{ label: 'Colorful', name: 'colorful', colors: ['#50c878', 'green', 'blue'] },
-	// 			{ label: 'Pastel', name: 'pastel', colors: ['#ffc5bf', 'lightpink', 'brown'] }
-	// 		]
-	// 	}
-	// ];
-
 	const getIcon = (key, id) => {
+		if (!icons[key]) return;
+		if (!icons[key][id]) return;
+
 		return icons[key][id];
 	};
 
 	const filterConfig = [
-		{ items: categories, title: 'Categories', keys: { label: 'name', value: 'slug' } },
-		{ items: tags, title: 'Tags', keys: { label: 'name', value: 'name' } }
+		{ items: categories, title: 'Categories', id: 'categories', keys: { label: 'name', value: 'slug', icon: 'slug', color: 'hex' } },
+		{ items: tags, title: 'Tags', id: 'tags', keys: { label: 'name', value: 'slug', color: 'hex' } }
 	];
 
 	const filterOptions = filterConfig.map((config) => {
 		return {
 			title: config.title,
-			items: config.items.map((item) => ({
-				label: item[config.keys.label],
-				value: item[config.keys.value],
-				icon: getIcon(config.title, config.keys.value)
-			}))
+			id: config.id,
+			items: config.items.map((item) => {
+				const obj = {};
+
+				for (const key of Object.keys(config.keys)) {
+					if (key === 'icon') {
+						obj.icon = getIcon(config.id, item[config.keys.icon]);
+						continue;
+					}
+					if (config.keys[key]) obj[key] = item[config.keys[key]];
+				}
+				return obj;
+			})
 		};
 	});
-
-	console.log(filterOptions);
 
 	const sortOptions = [
 		{ label: 'Most Popular', value: 'most_popular' },
@@ -120,7 +108,15 @@
 	const filter = (_) => {
 		let options = [...components];
 
-		options = options.filter((opt) => opt.name.toLowerCase().includes(filters.query.toLowerCase()));
+		options = options.filter((opt) => {
+			if (!opt.name.toLowerCase().includes(filters.query.toLowerCase())) return false;
+
+			if (filters.tags.length && !filters.tags.some((slug) => opt.tags.findIndex((item) => item.slug === slug) !== -1)) return false;
+
+			if (filters.categories.length && !filters.categories.some((slug) => opt.category && opt.category.slug === slug)) return false;
+
+			return true;
+		});
 
 		return options;
 	};
@@ -139,7 +135,7 @@
 			find what you're looking for.
 		</p>
 	</div>
-	<FilterSplit options={filterOptions}>
+	<FilterSplit options={filterOptions} on:update={(e) => (filters = { ...filters, ...e.detail })}>
 		<div class="filters">
 			<FilterSearch placeholder="Search for a component..." on:update={(e) => (filters = { ...filters, query: e.detail })} />
 		</div>

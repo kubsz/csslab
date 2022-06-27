@@ -5,7 +5,8 @@
 	import chevronDown from '@iconify/icons-charm/chevron-down.js';
 	import NavDropdown from '../NavDropdown.svelte';
 
-	export let label, link;
+	export let label;
+	export let link = '/';
 	export let dropdown = null;
 	export let fill = false;
 	export let modalConfig;
@@ -71,7 +72,7 @@
 			}
 
 			&:not(.fill):hover {
-				color: $col-light-3;
+				color: $col-light-2;
 			}
 		}
 	}

@@ -163,7 +163,7 @@
 				padding-right: 1rem;
 				color: rgba(255, 255, 255, 0.3);
 				width: 1.6rem;
-				box-shadow: content-box;
+				box-sizing: content-box;
 			}
 
 			&:hover {
