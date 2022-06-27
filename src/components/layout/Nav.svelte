@@ -9,6 +9,7 @@
 
 	import NavItem from './NavItem.svelte';
 	import NavMobileMenu from './NavMobileMenu.svelte';
+	import NavProfile from './NavProfile.svelte';
 
 	import Logo from '../../assets/logo-light.svg';
 
@@ -169,11 +170,7 @@
 		}
 	];
 
-	const handleLogout = async () => {
-		const response = await axios.get('/api/auth/logout');
-
-		document.location.reload();
-	};
+	$: console.log(user);
 
 	const getNavHeight = () => dispatch('getNavHeight', { value: Math.ceil(navRef.getBoundingClientRect().height) });
 
@@ -192,10 +189,7 @@
 			{/each}
 		</ul>
 		{#if user}
-			<div>
-				<h5 style="color:white">{user.email}</h5>
-				<Button on:click={handleLogout}>Logout</Button>
-			</div>
+			<NavProfile {user} />
 		{:else}
 			<ul>
 				{#each options.filter((opt) => opt.right) as option}

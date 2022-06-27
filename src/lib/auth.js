@@ -8,5 +8,5 @@ export const getUserData = async (jwt) => {
 		}
 	});
 
-	return pick(response.data, ['username', 'email', 'confirmed', 'createdAt', 'slug']);
+	return pick(response.data, ['username', 'email', 'confirmed', 'createdAt', 'slug', 'image']);
 };

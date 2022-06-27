@@ -16,6 +16,7 @@
     "@iconify/icons-bxl": "^1.2.1",
     "@iconify/icons-bxs": "^1.2.3",
     "@iconify/icons-bytesize": "^1.2.2",
+    "@iconify/icons-carbon": "^1.2.7",
     "@iconify/icons-charm": "^1.2.2",
     "@iconify/icons-ci": "^1.2.1",
     "@iconify/icons-cib": "^1.1.0",
@@ -46,5 +47,8 @@
     "svelte-portal": "^2.1.2",
     "svelte-preprocess": "^4.10.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "date-fns": "^2.28.0"
+  }
 }

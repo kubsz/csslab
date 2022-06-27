@@ -11,6 +11,8 @@
 
 	export let error;
 	export let errorMessage;
+
+	$: dispatch('update', { value: bindValue });
 </script>
 
 <div class="container" class:error>
@@ -18,15 +20,7 @@
 		<label for={label}>{label}</label>
 	{/if}
 	<div class="input-container">
-		<input
-			spellcheck="false"
-			{placeholder}
-			id={label}
-			value={bindValue}
-			{type}
-			on:blur
-			on:keyup={(e) => dispatch('update', { value: e.target.value })}
-		/>
+		<input spellcheck="false" {placeholder} id={label} bind:value={bindValue} on:blur />
 		{#if icon}
 			<div class="icon-container">
 				<Icon {icon} />

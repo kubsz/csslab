@@ -8,9 +8,8 @@
 	import userIcon from '@iconify/icons-bxs/user.js';
 
 	import ModalHeader from '../misc/ModalHeader.svelte';
-	import IconInput from '../general/IconInput.svelte';
+	import Form from '../general/Form.svelte';
 	import Modal from '../general/Modal.svelte';
-	import Button from '../general/Button.svelte';
 
 	export let isOpen;
 
@@ -34,31 +33,26 @@
 	};
 
 	const handleBlur = (blurredKey) => {
-		for (const key of Object.keys(formData)) {
-			const { validation, value, label } = formData[key];
-
-			if (blurredKey !== key && !value) continue;
-
-			const rules = [
-				{
-					message: `${label} is too short.`,
-					conditions: [value.length < validation.min]
-				},
-				{
-					message: `${label} is too long.`,
-					conditions: [value.length > validation.max]
-				}
-			];
-
-			const brokenRule = rules.find((x) => x.conditions.indexOf(true) > -1);
-
-			if (!brokenRule) {
-				formData[key] = { ...formData[key], error: false, errorMessage: null };
-				continue;
-			}
-
-			formData[key] = { ...formData[key], error: true, errorMessage: brokenRule.message };
-		}
+		// for (const key of Object.keys(formData)) {
+		// 	const { validation, value, label } = formData[key];
+		// 	if (blurredKey !== key && !value) continue;
+		// 	const rules = [
+		// 		{
+		// 			message: `${label} is too short.`,
+		// 			conditions: [value.length < validation.min]
+		// 		},
+		// 		{
+		// 			message: `${label} is too long.`,
+		// 			conditions: [value.length > validation.max]
+		// 		}
+		// 	];
+		// 	const brokenRule = rules.find((x) => x.conditions.indexOf(true) > -1);
+		// 	if (!brokenRule) {
+		// 		formData[key] = { ...formData[key], error: false, errorMessage: null };
+		// 		continue;
+		// 	}
+		// 	formData[key] = { ...formData[key], error: true, errorMessage: brokenRule.message };
+		// }
 	};
 
 	const handleSubmit = async () => {
@@ -72,11 +66,11 @@
 		try {
 			const response = await axios.post(endpoint, { identifier, password });
 
-			if (response.status !== 200) throw Error('error logging in');
+			console.log(response.data);
+
 			document.location.reload();
 		} catch (err) {
-			console.log(err);
-			error = err.message;
+			error = err.response.data.message;
 		}
 	};
 </script>
@@ -88,41 +82,6 @@
 			title="Welcome Back!"
 			subtext="Great to see you again! Enter your credentials to continue to have full access to CSSLab"
 		/>
-		<form class="form" on:submit|preventDefault={handleSubmit}>
-			{#each Object.keys(formData) as formKey}
-				<div class="form-section f-100">
-					<IconInput
-						icon={userIcon}
-						placeholder={formData[formKey].placeholder}
-						label={formData[formKey].label}
-						bindValue={formData[formKey].value}
-						type={formData[formKey].validation.type}
-						on:update={({ detail: { value } }) => (formData[formKey].value = value)}
-						on:blur={() => handleBlur(formKey)}
-						error={formData[formKey].error}
-						errorMessage={formData[formKey].errorMessage}
-					/>
-				</div>
-			{/each}
-			<div class="form-section f-100">
-				<Button modifiers={['block', 'secondary']}>Login</Button>
-			</div>
-		</form>
+		<Form {error} elements={formData} on:submit={handleSubmit} on:elementBlur={(e) => handleBlur(e.detail.key)} />
 	</Modal>
 {/if}
-
-<style lang="scss">
-	.form {
-		padding: $gutter $gutter $gutter $gutter;
-		display: flex;
-		flex-flow: row wrap;
-		gap: $gutter * 1.5;
-		width: 100%;
-
-		.form-section {
-			&.f-100 {
-				width: 100%;
-			}
-		}
-	}
-</style>

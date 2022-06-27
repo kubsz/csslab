@@ -6,25 +6,43 @@ export const post = async ({ request }) => {
 
 	const { identifier, password } = data;
 
-	console.log(data);
+	console.log(identifier, password);
 
 	if (!identifier || !password) {
-		throw Error('Request must contain "identiifer" and "password" field.');
+		return {
+			status: 400,
+			body: {
+				status: 'error',
+				message: 'Body must contain identifier and password.'
+			}
+		};
 	}
+	try {
+		const endpoint = 'http://localhost:1337/api/auth/local';
 
-	const endpoint = 'http://localhost:1337/api/auth/local';
+		const response = await axios.post(endpoint, { identifier, password });
 
-	const response = await axios.post(endpoint, { identifier, password });
-
-	return {
-		status: 200,
-		headers: {
-			'set-cookie': cookie.serialize('token', response.data.jwt, {
-				httpOnly: true,
-				maxAge: 60 * 60 * 24 * 7,
-				path: '/'
-			})
-		},
-		body: response.data
-	};
+		return {
+			status: 200,
+			headers: {
+				'set-cookie': cookie.serialize('token', response.data.jwt, {
+					httpOnly: true,
+					maxAge: 60 * 60 * 24 * 7,
+					path: '/'
+				})
+			},
+			body: {
+				status: 'success',
+				data: response.data
+			}
+		};
+	} catch (error) {
+		return {
+			status: 400,
+			body: {
+				status: 'error',
+				message: error.response.data.error.message
+			}
+		};
+	}
 };
