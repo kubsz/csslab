@@ -20,7 +20,8 @@
 </script>
 
 <script>
-	import { pick } from 'lodash';
+	import lodash from 'lodash';
+	const { pick } = lodash;
 
 	import Section from '$components/layout/Section.svelte';
 	import FilterSplit from '$components/general/FilterSplit.svelte';

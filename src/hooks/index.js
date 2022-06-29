@@ -1,6 +1,5 @@
 import { parse } from 'cookie';
 import { getUserData } from '$lib/auth.js';
-import { slice } from 'lodash';
 
 export async function handle({ event, resolve }) {
 	const { request } = event;
