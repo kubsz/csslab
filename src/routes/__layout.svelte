@@ -34,7 +34,7 @@
 <div class="root" style="--nav-height: {navHeight}px">
 	<Nav {user} on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
 	<div class="content">
-		<Breadcrumbs {crumbs} />
+		<!-- <Breadcrumbs {crumbs} /> -->
 		<slot />
 	</div>
 	<Footer />

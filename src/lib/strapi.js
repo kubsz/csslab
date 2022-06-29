@@ -1,5 +1,5 @@
 export const strapiImage = (image, size = 'thumbnail') => {
-	let [url, path] = ['http://localhost:1337', null];
+	let [url, path] = [import.meta.env.VITE_PUBLIC_API_URL, null];
 
 	if (!image) {
 		return 'https://avatars.githubusercontent.com/u/19872173?s=280&v=4';

@@ -1,20 +1,18 @@
 <script context="module">
 	import { scale, fly } from 'svelte/transition';
 	export const load = async ({ url, params, props, session, fetch, stuff }) => {
-		const components = await fetch('http://localhost:1337/api/components?populate=*')
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
-		const categories = await fetch('http://localhost:1337/api/categories?populate=*')
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
-		const tags = await fetch('http://localhost:1337/api/tags?populate=*')
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
+		const components = await fetch(`/api/components?populate=*`).then((res) => res.json());
+		const categories = await fetch(`/api/categories?populate=*`).then((res) => res.json());
+		const tags = await fetch(`/api/tags?populate=*`).then((res) => res.json());
 
 		const removeStrapiAttributes = (arr) => arr.map((item) => ({ id: item.id, ...item.attributes }));
 
 		return {
-			props: { components, categories, tags: removeStrapiAttributes(tags.data) }
+			props: {
+				components: components.data,
+				categories: categories.data,
+				tags: removeStrapiAttributes(tags.data.data)
+			}
 		};
 	};
 </script>
@@ -107,7 +105,7 @@
 		{ icon: grid3x3GapFill, value: 'CARD', label: 'Card' }
 	];
 
-	const filter = (_) => {
+	const filter = (__) => {
 		let options = [...components];
 
 		options = options.filter((opt) => {

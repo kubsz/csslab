@@ -3,7 +3,7 @@ import lodash from 'lodash';
 const { pick } = lodash;
 
 export const getUserData = async (jwt) => {
-	const response = await axios.get('http://localhost:1337/api/users/me', {
+	const response = await axios.get(`${import.meta.env.VITE_PUBLIC_API_URL}/api/users/me`, {
 		headers: {
 			Authorization: `Bearer ${jwt}`
 		}

@@ -28,7 +28,7 @@
 			label: 'Password',
 			placeholder: 'Enter password...',
 			icon: lockAlt,
-			validation: { min: 8, max: 64 }
+			validation: { min: 8, max: 64, type: 'password' }
 		}
 	};
 
@@ -65,8 +65,6 @@
 
 		try {
 			const response = await axios.post(endpoint, { identifier, password });
-
-			console.log(response.data);
 
 			document.location.reload();
 		} catch (err) {

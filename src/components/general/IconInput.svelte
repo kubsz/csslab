@@ -7,10 +7,14 @@
 	export let icon;
 	export let label;
 	export let bindValue;
-	export let type = 'text';
+	export let validation = {};
 
 	export let error;
 	export let errorMessage;
+
+	const setType = (node) => {
+		if (node && validation?.type) node.setAttribute('type', validation.type);
+	};
 
 	$: dispatch('update', { value: bindValue });
 </script>
@@ -20,7 +24,7 @@
 		<label for={label}>{label}</label>
 	{/if}
 	<div class="input-container">
-		<input spellcheck="false" {placeholder} id={label} bind:value={bindValue} on:blur />
+		<input use:setType {placeholder} id={label} bind:value={bindValue} on:blur />
 		{#if icon}
 			<div class="icon-container">
 				<Icon {icon} />

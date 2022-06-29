@@ -6,7 +6,7 @@
 	import NavDropdown from '../NavDropdown.svelte';
 
 	export let label;
-	export let link = '/';
+	export let link = null;
 	export let dropdown = null;
 	export let fill = false;
 	export let modalConfig;
@@ -25,7 +25,7 @@
 	on:mouseenter|self={!dropdown || (() => (dropdownActive = true))()}
 	on:mouseleave|self={!dropdown || (() => (dropdownActive = false))()}
 >
-	<a class:fill href={link} on:click={handleClick}>
+	<a class:fill href={link || '#'} on:click={handleClick}>
 		<span>{label}</span>
 		{#if dropdown}
 			<Icon class="arrow" icon={chevronDown} />
@@ -49,6 +49,8 @@
 			display: flex;
 			align-items: center;
 			gap: 6px;
+
+			cursor: pointer;
 
 			transition: 0.1s ease;
 

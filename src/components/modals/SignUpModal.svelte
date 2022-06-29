@@ -36,14 +36,14 @@
 			label: 'Password',
 			placeholder: 'Enter password...',
 			icon: lockAlt,
-			validation: { min: 8, max: 64 }
+			validation: { min: 8, max: 64, type: 'password' }
 		},
 		password2: {
 			value: '',
 			label: 'Confirm Password',
 			placeholder: 'Enter password confirmation...',
 			icon: lockAlt,
-			validation: { min: 8, max: 64 }
+			validation: { min: 8, max: 64, type: 'password' }
 		}
 	};
 
@@ -68,7 +68,7 @@
 				},
 				{
 					message: `Passwords are not the same`,
-					conditions: [['password', 'password2'].indexOf(key) - 1 && formData.password.value !== formData.password2.value]
+					conditions: [['password', 'password2'].indexOf(key) > -1 && formData.password.value !== formData.password2.value]
 				}
 			];
 
@@ -127,6 +127,7 @@
 						on:blur={() => handleBlur(formKey)}
 						error={formData[formKey].error}
 						errorMessage={formData[formKey].errorMessage}
+						validation={formData[formKey].validation}
 					/>
 				</div>
 			{/each}

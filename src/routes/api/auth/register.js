@@ -12,7 +12,7 @@ export const post = async ({ request }) => {
 
 	console.log(username, email, password);
 
-	const endpoint = 'http://localhost:1337/api/auth/local/register';
+	const endpoint = `${import.meta.env.VITE_PUBLIC_API_URL}/api/auth/local/register`;
 
 	const response = await axios.post(endpoint, { username, email, password });
 

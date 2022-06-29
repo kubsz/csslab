@@ -6,8 +6,6 @@ export const post = async ({ request }) => {
 
 	const { identifier, password } = data;
 
-	console.log(identifier, password);
-
 	if (!identifier || !password) {
 		return {
 			status: 400,
@@ -18,7 +16,7 @@ export const post = async ({ request }) => {
 		};
 	}
 	try {
-		const endpoint = 'http://localhost:1337/api/auth/local';
+		const endpoint = `${import.meta.env.VITE_PUBLIC_API_URL}/api/auth/local`;
 
 		const response = await axios.post(endpoint, { identifier, password });
 

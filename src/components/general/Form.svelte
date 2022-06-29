@@ -24,6 +24,7 @@
 				on:blur={() => dispatch('elementBlur', { key })}
 				error={obj.error}
 				errorMessage={obj.errorMessage}
+				validation={obj.validation}
 			/>
 		</div>
 	{/each}
