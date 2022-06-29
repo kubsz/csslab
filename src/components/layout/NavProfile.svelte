@@ -10,9 +10,9 @@
 	import Icon from '@iconify/svelte';
 
 	import caretDownFill from '@iconify/icons-bi/caret-down-fill.js';
-	import userIcon from '@iconify/icons-bx/user';
+	import userIcon from '@iconify/icons-bx/user.js';
 	import logoutIcon from '@iconify/icons-ic/twotone-logout.js';
-	import settingsIcon from '@iconify/icons-carbon/settings';
+	import settingsIcon from '@iconify/icons-carbon/settings.js';
 
 	export let user;
 
