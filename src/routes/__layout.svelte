@@ -1,11 +1,13 @@
 <script context="module">
+	import { buildCrumbs } from '$utils';
 	export async function load({ url, session }) {
 		const darkPathnames = ['/'];
 
 		return {
 			props: {
 				dark: darkPathnames.indexOf(url.pathname) > -1,
-				user: session.user
+				user: session.user,
+				crumbs: buildCrumbs(url.pathname)
 			}
 		};
 	}
@@ -14,11 +16,13 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { Modals, closeModal } from 'svelte-modals';
-	import Footer from '../components/layout/Footer.svelte';
-	import Nav from '../components/layout/Nav.svelte';
+	import Footer from '$components/layout/Footer.svelte';
+	import Nav from '$components/layout/Nav.svelte';
+	import Breadcrumbs from '$components/layout/Breadcrumbs.svelte';
 
 	export let dark = false;
 	export let user = null;
+	export let crumbs;
 
 	let navHeight = 94;
 </script>
@@ -30,6 +34,7 @@
 <div class="root" style="--nav-height: {navHeight}px">
 	<Nav {user} on:getNavHeight={(e) => (navHeight = e.detail.value > navHeight ? e.detail.value : navHeight)} />
 	<div class="content">
+		<Breadcrumbs {crumbs} />
 		<slot />
 	</div>
 	<Footer />

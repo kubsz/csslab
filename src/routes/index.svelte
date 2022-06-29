@@ -1,15 +1,15 @@
 <script>
-	import IPhone from './../components/general/IPhone.svelte';
+	import IPhone from './$components/general/IPhone.svelte';
 	import javascriptFill from '@iconify/icons-akar-icons/javascript-fill.js';
 	import svelteIcon from '@iconify/icons-cib/svelte.js';
 	import vueFill from '@iconify/icons-akar-icons/vue-fill.js';
 	import reactFill from '@iconify/icons-akar-icons/react-fill.js';
 
-	import Section from './../components/layout/Section.svelte';
-	import Button from '../components/general/Button.svelte';
-	import SupportedTechnologyShowcase from '../components/misc/SupportedTechnologyShowcase.svelte';
-	import Jumbotron from '../components/general/Jumbotron.svelte';
-	import MacScreen from '../components/general/MacScreen.svelte';
+	import Section from './$components/layout/Section.svelte';
+	import Button from '$components/general/Button.svelte';
+	import SupportedTechnologyShowcase from '$components/misc/SupportedTechnologyShowcase.svelte';
+	import Jumbotron from '$components/general/Jumbotron.svelte';
+	import MacScreen from '$components/general/MacScreen.svelte';
 
 	const technologies = [
 		{

@@ -1,4 +1,5 @@
 <script context="module">
+	import { scale, fly } from 'svelte/transition';
 	export const load = async ({ url, params, props, session, fetch, stuff }) => {
 		const components = await fetch('http://localhost:1337/api/components?populate=*')
 			.then((res) => res.json())
@@ -21,13 +22,13 @@
 <script>
 	import { pick } from 'lodash';
 
-	import Section from '../../components/layout/Section.svelte';
-	import FilterSplit from '../../components/general/FilterSplit.svelte';
-	import FilterSearch from '../../components/general/FilterSearch.svelte';
-	import FrameCard from '../../components/general/FrameCard.svelte';
-	import Select from '../../components/general/Select/index.svelte';
-	import ViewToggle from '../../components/general/ViewToggle.svelte';
-	import ComponentCard from '../../components/general/ComponentCard.svelte';
+	import Section from '$components/layout/Section.svelte';
+	import FilterSplit from '$components/general/FilterSplit.svelte';
+	import FilterSearch from '$components/general/FilterSearch.svelte';
+	import FrameCard from '$components/general/FrameCard.svelte';
+	import Select from '$components/general/Select/index.svelte';
+	import ViewToggle from '$components/general/ViewToggle.svelte';
+	import ComponentCard from '$components/general/ComponentCard.svelte';
 
 	import buttonIcon from '@iconify/icons-dashicons/button.js';
 	import formDropdown from '@iconify/icons-mdi/form-dropdown.js';
@@ -169,9 +170,11 @@
 			{/each}
 			{#if !filteredOptions.length}
 				<div class="error">
-					<span class="emoji">😟</span>
-					<span class="title">No Results Found</span>
-					<p class="text">No results found matching your filters. Please modify your filters and try again.</p>
+					<span in:scale={{ duration: 500 }} class="emoji">😟</span>
+					<span in:fly={{ y: 20, delay: 250 }} class="title">No Results Found</span>
+					<p in:fly={{ y: 20, delay: 400 }} class="text">
+						No results found matching your filters. Please modify your filters and try again.
+					</p>
 				</div>
 			{/if}
 		</div>

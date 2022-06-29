@@ -1,6 +1,7 @@
 import autoPreprocess from 'svelte-preprocess';
 import svg from '@poppanator/sveltekit-svg';
 import vercel from '@sveltejs/adapter-auto';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,6 +15,15 @@ const config = {
 			server: {
 				fs: {
 					allow: ['locales']
+				}
+			},
+			resolve: {
+				alias: {
+					$components: path.resolve('./src/components'),
+					$utils: path.resolve('./src/lib/utils'),
+					$assets: path.resolve('./src/assets'),
+					$directives: path.resolve('./src/directives'),
+					$hooks: path.resolve('./src/hooks')
 				}
 			}
 		}

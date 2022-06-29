@@ -12,3 +12,18 @@ export const objToCss = (obj, variables = false, suffix = '') => {
 };
 
 export const pluralify = (num, prefix = '') => (num === 1 ? '' : prefix + 's');
+
+export const buildCrumbs = (pathname) => {
+	const split = pathname.split('/');
+	let href = '';
+	return split.map((crumb, i) => {
+		if (crumb) href += `/${crumb}`;
+		return {
+			label: (crumb || 'Home')
+				.split('-')
+				.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+				.join(' '),
+			href: href || '/'
+		};
+	});
+};
