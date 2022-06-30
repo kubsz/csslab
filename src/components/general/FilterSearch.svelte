@@ -8,15 +8,14 @@
 	import closeOutline from '@iconify/icons-eva/close-outline.js';
 
 	export let placeholder;
-	export let defaultValue;
+	export let defaultValue = '';
 
-	let value = '';
+	let value = defaultValue;
 
 	$: dispatch('update', value);
 </script>
 
 <div class="input-container">
-	<Icon icon={searchIcon} />
 	<input spellcheck="false" type="text" {placeholder} bind:value />
 	{#if value.length}
 		<button on:click={() => (value = '')} transition:fly={{ y: 15 }}>
