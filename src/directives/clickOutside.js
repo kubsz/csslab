@@ -1,4 +1,4 @@
-export const clickOutside = (node) => {
+export default (node) => {
 	const handleClick = (e) => {
 		if (e.target.closest('.disable_clickoutside')) return;
 		if (node && !node.contains(e.target) && !e.defaultPrevented) {

@@ -1,5 +1,13 @@
+import { format, formatDistance, subDays } from 'date-fns';
+
+export const removeStrapiAttributes = (arr) => arr.map((item) => ({ id: item.id, ...item.attributes }));
+
 export const strapiImage = (image, size = 'thumbnail') => {
 	let [url, path] = [import.meta.env.VITE_PUBLIC_API_URL, null];
+
+	if (image.data) {
+		image = removeStrapiAttributes([image.data])[0];
+	}
 
 	if (!image) {
 		return 'https://avatars.githubusercontent.com/u/19872173?s=280&v=4';
@@ -13,8 +21,6 @@ export const strapiImage = (image, size = 'thumbnail') => {
 
 	return `${url}${path}`;
 };
-
-import { format, formatDistance, subDays } from 'date-fns';
 
 export const strapiDate = (date, distance = false) => {
 	if (distance) {

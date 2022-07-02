@@ -5,7 +5,7 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	import { inject } from '../../directives/inject';
+	import inject from '$directives/inject';
 
 	import NavItem from './NavItem.svelte';
 	import NavMobileMenu from './NavMobileMenu.svelte';

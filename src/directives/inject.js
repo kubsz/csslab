@@ -1,4 +1,4 @@
-export const inject = (node, config) => {
+export default (node, config) => {
 	const target = document.querySelector(config.selector);
 
 	if (!target) return;

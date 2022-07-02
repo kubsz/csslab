@@ -3,7 +3,7 @@
 	flex-flow: row wrap;
 	gap: $gutter;
 	align-items: start;
-	padding: $gutter;
+	// padding: $gutter;
 	$breakpoints: 1600, 1400, 1200, 992, 768, 576, 400;
 
 	&.align-center {

@@ -8,7 +8,7 @@
 
 	const handleMouseMove = (e) => {
 		if (!texture) return;
-		mousePosition = { left: e.clientX, top: e.clientY };
+		mousePosition = { left: e.clientX, top: e.clientY - 100 };
 	};
 </script>
 
@@ -36,16 +36,25 @@
 		&.padding-vertical-10 {
 			padding: 10rem 0;
 		}
+
+		&.padding {
+			padding: $gutter 0;
+		}
 		&.dark {
 			background-color: $col-dark-1;
 		}
 		&.lightish {
 			background-color: $col-light-2;
 		}
-	}
-	.section-content {
-		position: relative;
-		z-index: 3;
+		.section-content {
+			position: relative;
+			z-index: 3;
+		}
+		&.gap .section-content {
+			display: grid;
+			grid-template-columns: 100%;
+			grid-gap: $gutter;
+		}
 	}
 
 	.texture-overlay {
@@ -74,7 +83,8 @@
 			opacity: 1;
 		}
 		.texture-opening {
-			background-image: radial-gradient(rgba($col-dark-1, 1), $col-dark-1 20vw);
+			/* background-color: rgba(255, 255, 255, 0.1); */
+			background-image: radial-gradient(rgba($col-dark-1, 0.3), $col-dark-1 25%);
 			background-position: center;
 			width: 200vw;
 			height: 200vw;

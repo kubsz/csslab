@@ -33,7 +33,11 @@
 				style={item.color ? `--col-active:${item.color}` : ''}
 			>
 				{#if item.icon}
-					<Icon class="icon" icon={item.icon} />
+					{#if typeof item.icon === 'string'}
+						<img class="icon" src={item.icon} alt="{item.label} icon" />
+					{:else}
+						<Icon class="icon" icon={item.icon} />
+					{/if}
 				{/if}
 				<span>{item.label}</span>
 			</button>
@@ -47,7 +51,6 @@
 		gap: $gutter;
 		width: 100%;
 		--col-active: #{$col-primary-rgb};
-
 		&.wrap {
 			flex-wrap: wrap;
 		}
@@ -67,6 +70,13 @@
 			min-height: calc(24rem / 2 - #{$gutter / 2});
 
 			aspect-ratio: 1/1;
+		}
+
+		&.horizontal-buttons {
+			li button {
+				flex-direction: row;
+				gap: 1.4rem;
+			}
 		}
 
 		li {
@@ -90,6 +100,10 @@
 
 				:global(.icon) {
 					font-size: 2.4rem;
+				}
+
+				img.icon {
+					width: 1.4rem;
 				}
 
 				span {

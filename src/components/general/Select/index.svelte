@@ -3,9 +3,9 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	import { objToCss } from '../../../lib/utils';
-	import { clickOutside } from './../../../directives/clickOutside.js';
-	import { inject } from '../../../directives/inject';
+	import { objToCss } from '$lib/utils';
+	import clickOutside from '$directives/clickOutside.js';
+	import inject from '$directives/inject';
 
 	import SelectDropdownItem from './SelectDropdownItem.svelte';
 	import SelectValue from './SelectValue.svelte';

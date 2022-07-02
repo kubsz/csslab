@@ -4,8 +4,8 @@
 	import axios from 'axios';
 
 	import { strapiImage } from '$lib/strapi';
-	import { inject } from '../../directives/inject';
-	import { clickOutside } from '../../directives/clickOutside';
+	import inject from '$directives/inject';
+	import clickOutside from '$directives/clickOutside';
 
 	import Icon from '@iconify/svelte';
 
