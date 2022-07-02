@@ -64,7 +64,7 @@
 		} = formData;
 
 		try {
-			const response = await axios.post(endpoint, { identifier, password });
+			await axios.post(endpoint, { identifier, password });
 
 			document.location.reload();
 		} catch (err) {

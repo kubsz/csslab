@@ -13,6 +13,7 @@
 	import userIcon from '@iconify/icons-bx/user.js';
 	import logoutIcon from '@iconify/icons-ic/twotone-logout.js';
 	import settingsIcon from '@iconify/icons-carbon/settings.js';
+	import { getDropdownPosition } from '$lib/utils';
 
 	export let user;
 
@@ -24,11 +25,6 @@
 		const response = await axios.get('/api/auth/logout');
 
 		document.location.reload();
-	};
-
-	const getDropdownPosition = () => {
-		const rect = buttonRef.getBoundingClientRect();
-		return `right:${windowWidth - rect.right}px;top:${rect.top + rect.height + 15}px`;
 	};
 </script>
 
@@ -53,8 +49,7 @@
 		use:clickOutside
 		on:clickOutside={() => (dropdownActive = false)}
 		transition:fly={{ y: 20 }}
-		use:inject={'.overlay'}
-		style={getDropdownPosition()}
+		use:inject={{ selector: '.overlay', styles: getDropdownPosition(buttonRef) }}
 	>
 		<button on:click={() => {}}>
 			<Icon icon={userIcon} />

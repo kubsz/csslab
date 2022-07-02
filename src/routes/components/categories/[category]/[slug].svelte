@@ -1,5 +1,4 @@
 <script context="module">
-	import { fly, scale } from 'svelte/transition';
 	export const load = async ({ url, params, props, session, fetch, stuff }) => {
 		const component = await fetch(`/api/components/${params.slug}`).then((res) => res.json());
 		return {
@@ -12,6 +11,7 @@
 
 <script>
 	import { backOut } from 'svelte/easing';
+	import { scale } from 'svelte/transition';
 
 	import { strapiImage } from '$lib/strapi';
 
@@ -20,6 +20,7 @@
 	import Jumbo from '$components/layout/Jumbo.svelte';
 	import IconButtons from '$components/general/IconButtons.svelte';
 	import ComponentOptions from '$components/general/ComponentOptions.svelte';
+	import GlowingButton from '$components/csslab_components/GlowingButton.svelte';
 
 	import Icon from '@iconify/svelte';
 	import likeIconFilled from '@iconify/icons-icon-park-solid/like';
@@ -31,12 +32,21 @@
 	let liked = false;
 	let likes = 16;
 
-	let config = {
-		props: [],
-		variables: []
-	};
+	const arrToObject = (arr) => arr.reduce((obj, item) => Object.assign(obj, { [item.name]: item.config.value || null }), {});
 
-	$: console.log(config.props);
+	console.log(component);
+
+	const getInitialConfig = () => ({
+		variables: arrToObject(component.variables),
+		props: arrToObject(component.props)
+	});
+
+	let config = getInitialConfig();
+
+	const objectToCssVariables = (object) =>
+		Object.entries(object)
+			.map(([key, value]) => `--${key}:${value};`)
+			.join('');
 </script>
 
 <Section margin modifiers={['padding', 'gap']}>
@@ -86,14 +96,22 @@
 	/>
 	<div class="main row">
 		<div class="col-5">
-			<ComponentOptions props={component.props} variables={component.variables} on:update={(e) => (config = e.detail.config)} />
+			<ComponentOptions
+				defaultConfig={config}
+				options={[
+					{ title: 'Props', configKey: 'props', items: component.props },
+					{ title: 'Variables', configKey: 'variables', items: component.variables }
+				]}
+				on:update={(e) => (config = e.detail.config)}
+			/>
 		</div>
 		<div class="col-15">
 			<Card modifiers={['dark-3']}>
-				<!-- {#each config.props as prop}
-					<span>{Object.entries(prop)[0]}</span>
-					<span>{Object.entries(prop)[1]}</span>
-				{/each} -->
+				{#if config}
+					<div class="showcase" style={objectToCssVariables(config.variables)}>
+						<svelte:component this={GlowingButton} {...config.props}>Button Text</svelte:component>
+					</div>
+				{/if}
 			</Card>
 		</div>
 	</div>
@@ -174,7 +192,7 @@
 		position: relative;
 		margin-top: auto;
 		button {
-			background-color: $col-dark-2;
+			background-color: $col-dark-4;
 			border-radius: $radius;
 			padding: 1rem;
 			width: 3.6rem;

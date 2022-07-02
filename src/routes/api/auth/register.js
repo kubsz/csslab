@@ -10,8 +10,6 @@ export const post = async ({ request }) => {
 		throw Error('Request must contain "identiifer", "password", and "email" field.');
 	}
 
-	console.log(username, email, password);
-
 	const endpoint = `${import.meta.env.VITE_PUBLIC_API_URL}/api/auth/local/register`;
 
 	const response = await axios.post(endpoint, { username, email, password });

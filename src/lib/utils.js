@@ -27,3 +27,9 @@ export const buildCrumbs = (pathname) => {
 		};
 	});
 };
+
+export const getDropdownPosition = (ref) => {
+	if (!ref) return '';
+	const rect = ref.getBoundingClientRect();
+	return `left:${rect.left}px;top:${rect.top + rect.height + 15}px`;
+};

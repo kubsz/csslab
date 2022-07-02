@@ -16,7 +16,7 @@
 
 <style lang="scss">
 	.header {
-		background-color: $col-dark-1;
+		background-color: $col-dark-3;
 		border-radius: $radius;
 		display: flex;
 		align-items: stretch;

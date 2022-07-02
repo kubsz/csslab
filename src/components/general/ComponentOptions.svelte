@@ -7,27 +7,26 @@
 	import Input from '$components/elements/Input.svelte';
 	import ColorPicker from '$components/elements/ColorPicker.svelte';
 
-	export let props;
-	export let variables;
+	export let options;
+	export let defaultConfig;
 
-	const getInitialConfig = () => ({
-		variables: variables.map((item) => ({ [item.name]: item.value || null })),
-		props: props.map((item) => ({ [item.name]: item.value || null }))
-	});
-
-	let config = getInitialConfig();
+	let config = defaultConfig;
 	$: console.log(config);
+
+	const handleElementUpdate = (e, configKey, identifier) => {
+		config[configKey][identifier] = e.detail.value;
+	};
 
 	const components = {
 		input: Input,
-		color_picker: ColorPicker
+		color: ColorPicker
 	};
 
 	$: dispatch('update', { config });
 </script>
 
 <div class="options">
-	{#each [{ title: 'Props', configKey: 'props', items: props }, { title: 'Variables', configKey: 'variables', items: variables }] as list}
+	{#each options as list}
 		<Card>
 			<h4 class="title">{list.title}</h4>
 			<ul class="prop-list">
@@ -36,7 +35,7 @@
 						<label for="#">{item.label}</label>
 						<svelte:component
 							this={components[item.config.preset]}
-							on:update={(e) => (config[list.configKey][item.name] = e.detail.value)}
+							on:update={(e) => handleElementUpdate(e, list.configKey, item.name)}
 							{...item.config.options || {}}
 						/>
 					</li>

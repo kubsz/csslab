@@ -198,7 +198,7 @@
 	{/if}
 </nav>
 {#if mobileNavActive}
-	<div class="nav-dropdown" style="--nav-height:{navRef.offsetHeight}px" transition:slide|local use:inject={'.overlay'}>
+	<div class="nav-dropdown" transition:slide|local use:inject={{ selector: '.overlay', styles: `--nav-height:${navRef.offsetHeight}px` }}>
 		<NavMobileMenu />
 	</div>
 {/if}
