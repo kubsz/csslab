@@ -3,7 +3,7 @@ export default (node, config) => {
 
 	if (!target) return;
 
-	node.style.cssText = config.style || '';
+	if (config.style) node.style.cssText = config.style || '';
 
 	target.insertAdjacentElement('afterbegin', node);
 

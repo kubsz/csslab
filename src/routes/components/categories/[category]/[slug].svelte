@@ -239,4 +239,8 @@
 			color: $col-like;
 		}
 	}
+	.showcase {
+		@include flexCenter;
+		height: 20rem;
+	}
 </style>

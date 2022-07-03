@@ -11,7 +11,6 @@
 	export let defaultConfig;
 
 	let config = defaultConfig;
-	$: console.log(config);
 
 	const handleElementUpdate = (e, configKey, identifier) => {
 		config[configKey][identifier] = e.detail.value;
@@ -37,6 +36,7 @@
 							this={components[item.config.preset]}
 							on:update={(e) => handleElementUpdate(e, list.configKey, item.name)}
 							{...item.config.options || {}}
+							defaultValue={config[list.configKey][item.name]}
 						/>
 					</li>
 				{/each}
